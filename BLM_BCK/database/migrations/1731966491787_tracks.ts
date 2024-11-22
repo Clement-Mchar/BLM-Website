@@ -1,7 +1,7 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class Track extends BaseSchema {
-    protected tableName = 'Track'
+    protected tableName = 'tracks'
 
     public async up () {
         this.schema.createTable(this.tableName, (table) => {
@@ -11,6 +11,9 @@ export default class Track extends BaseSchema {
             table.bigInteger('artists').notNullable()
             table.text('photo_url')
             table.uuid('album_id').notNullable()
+
+            table.timestamp('created_at').notNullable()
+            table.timestamp('updated_at').nullable()
         })
     }
 
