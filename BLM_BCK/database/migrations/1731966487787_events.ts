@@ -5,13 +5,13 @@ export default class Event extends BaseSchema {
 
     public async up () {
         this.schema.createTable(this.tableName, (table) => {
+            table.uuid('id').primary()
             table.string('name').notNullable()
             table.text('photo_url')
-            table.uuid('id').primary()
             table.text('description')
             table.date('date')
             table.string('location')
-
+            table.string('reservation')
             table.timestamp('created_at').notNullable()
             table.timestamp('updated_at').nullable()
         })

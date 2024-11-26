@@ -2,39 +2,29 @@ import { DateTime } from 'luxon'
 import { randomUUID } from 'node:crypto'
 import { BaseModel, column, beforeCreate } from '@adonisjs/lucid/orm'
 
-export default class Event extends BaseModel {
+export default class Post extends BaseModel {
   static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
   declare id: string
 
   @beforeCreate()
-  static assignUuid(event: Event) {
-    event.id = randomUUID()
+  static assignUuid(post: Post) {
+    post.id = randomUUID()
   }
 
   @column()
-  declare name: string
+  declare title: string
 
   @column()
-  declare photo_url: string | null
+  declare body: string
 
   @column()
-  declare description: string
-
-  @column.date()
-  declare date: DateTime
-
-  @column()
-  declare location: string
-
-  @column()
-  declare reservation: string
+  declare author: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
-
 }

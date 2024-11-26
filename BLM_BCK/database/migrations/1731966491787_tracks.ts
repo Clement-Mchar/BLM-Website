@@ -8,9 +8,9 @@ export default class Track extends BaseSchema {
             table.uuid('id').primary()
             table.string('name').notNullable()
             table.string('length').notNullable()
-            table.bigInteger('artists').notNullable()
             table.text('photo_url')
             table.uuid('album_id').notNullable()
+            table.uuid('artist_id').notNullable()
 
             table.timestamp('created_at').notNullable()
             table.timestamp('updated_at').nullable()
