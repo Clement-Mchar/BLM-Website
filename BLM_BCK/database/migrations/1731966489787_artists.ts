@@ -14,7 +14,7 @@ export default class Artist extends BaseSchema {
             table.string('twitter')
             table.text('photo_url')
             table.string('insta')
-            table.integer('role_id')
+            table.string('role')
             table.json('videos_urls')
             table.timestamp('created_at').notNullable()
             table.timestamp('updated_at').nullable()

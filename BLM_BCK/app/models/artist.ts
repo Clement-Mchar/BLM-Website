@@ -1,8 +1,9 @@
 import { DateTime } from 'luxon'
+import Event from '#models/event'
 import Album from '#models/album'
 import { randomUUID } from 'node:crypto'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, beforeCreate, hasMany} from '@adonisjs/lucid/orm'
+import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, beforeCreate, hasMany, manyToMany} from '@adonisjs/lucid/orm'
 
 export default class Artist extends BaseModel {
   static selfAssignPrimaryKey = true
@@ -34,10 +35,13 @@ export default class Artist extends BaseModel {
   declare insta: string
 
   @column()
-  declare role_id: number
+  declare role: string
 
   @column()
   declare videos_urls: string[]
+
+  @manyToMany(() => Event)
+  declare events: ManyToMany<typeof Event>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
