@@ -22,7 +22,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare password: string
   
   @hasOne(() => Role)
-  declare role_id: HasOne<typeof Role>
+  declare role: HasOne<typeof Role>
+
+  @column()
+  declare role_id: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
