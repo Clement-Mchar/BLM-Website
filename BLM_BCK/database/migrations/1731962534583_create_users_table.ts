@@ -8,13 +8,8 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.string('full_name').nullable()
       table.string('password').notNullable()
-      table.integer('role_id').notNullable()
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
     })
-  }
-
-  async down() {
-    this.schema.dropTable(this.tableName)
   }
 }
