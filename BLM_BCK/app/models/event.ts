@@ -19,7 +19,7 @@ export default class Event extends BaseModel {
   declare name: string
 
   @column()
-  declare photo_url: string | null
+  declare photoUrl: string | null
 
   @column()
   declare description: string

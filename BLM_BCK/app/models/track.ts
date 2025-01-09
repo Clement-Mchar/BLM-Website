@@ -23,13 +23,13 @@ export default class Track extends BaseModel {
   declare length: string
 
   @column()
-  declare photo_url: string | null
+  declare photoUrl: string | null
 
   @belongsTo(() => Album)
-  declare album_id: BelongsTo<typeof Album>
+  declare albumid: BelongsTo<typeof Album>
 
   @belongsTo(() => Artist)
-  declare artist_id: BelongsTo<typeof Artist>
+  declare artistId: BelongsTo<typeof Artist>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -38,7 +38,7 @@ export default class Artist extends BaseModel {
   declare role: string
 
   @column()
-  declare videos_urls: string[]
+  declare videosUrls: string[]
 
   @manyToMany(() => Event)
   declare events: ManyToMany<typeof Event>

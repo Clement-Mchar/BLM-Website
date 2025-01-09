@@ -23,16 +23,16 @@ export default class Album extends BaseModel {
   declare date: DateTime
 
   @column()
-  declare photo_url: string | null
+  declare photoUrl: string | null
 
   @hasMany(() => Track)
-  declare tracks_ids: HasMany<typeof Track>
+  declare tracksIds: HasMany<typeof Track>
 
   @belongsTo (() => Artist)
-  declare artist_id: BelongsTo<typeof Artist>
+  declare artistId: BelongsTo<typeof Artist>
 
   @column()
-  declare spotify_link: string
+  declare spotifyLink: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
