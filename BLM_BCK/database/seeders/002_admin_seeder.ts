@@ -11,6 +11,7 @@ export default class extends BaseSeeder {
     admin.fullName = "Don"
     admin.password = pwd as string;
     admin.userRole = UserRole.Admin
+    admin.isAdmin = true
 
     admin.save()
   }
