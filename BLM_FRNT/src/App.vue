@@ -2,7 +2,6 @@
 </script>
 
 <template>
-  <!-- Le routeur insère ici le contenu des pages (comme Login.vue) -->
   <router-view />
 </template>
 
