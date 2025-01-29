@@ -8,7 +8,7 @@ export default class extends BaseSeeder {
     const pwd = env.get('ADMIN_PASSWORD')
     const admin = new User()
 
-    admin.fullName = "Don"
+    admin.username = "Don"
     admin.password = pwd as string;
     admin.userRole = UserRole.Admin
     admin.isAdmin = true

@@ -6,13 +6,13 @@
         </div>
         <div class="flex flex-col min-w-[40rem] min-h-[18rem] justify-between border-white border-solid border-2 p-3">
           <CsrfHandler />
-          <form class="min-h-86" @submit.prevent="onSubmit">
+          <form class="min-h-86" @submit.prevent="handleSubmit">
             <div class="mb-4">
-              <label for="fullName" class="block text-sm font-medium text-white">Pseudo</label>
+              <label for="username" class="block text-sm font-medium text-white">Pseudo</label>
               <input
-                id="fullName"
-                type="fullName"
-                v-model="fullName"
+                id="username"
+                type="username"
+                v-model="form.username"
                 required
                 class="mt-1 block h-10 w-full p-2 bg-slate-300 focus:border rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 />
@@ -22,7 +22,7 @@
               <input
                 id="password"
                 type="password"
-                v-model="password"
+                v-model="form.password"
                 required
                 class="mt-1 block w-full  p-2 bg-slate-300 focus:border rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 autocomplete="new-password"
@@ -52,38 +52,11 @@
 
 <script setup >
   import { ref } from 'vue';
-  import ky from 'ky';
   import CsrfHandler from '../components/CsrfHandler.vue';
-  import { api } from '../services/api';
+  import { blmApi } from '../lib/api'
+  import { useLogin } from '../composables/useLogin';
 
-  const fullName = ref('');
-  const password = ref('');
-  const errorMessage = ref('');
-  const successMessage = ref('');
-
-  const onSubmit = async () => {
-      try {
-        
-        const response = await api.post('http://localhost:3333/login', {
-          json: {
-            fullName: fullName.value,
-            password: password.value,
-          },
-          credentials: 'include'
-
-        }).json();
-        successMessage.value = 'Connexion réussie'
-      }
-        
-      catch (error) {
-      if (error.response) {
-        errorMessage.value = 'Identifiants incorrects';
-      } else {
-        errorMessage.value = console.log('wow');
-      }
-      successMessage.value = '';
-    }
-}
+  const { form, errorMessage, successMessage, handleSubmit } = useLogin();
 </script>
   
 <style scoped>

@@ -4,12 +4,12 @@ import User from '#models/user'
 export default class AuthController {
     
     async store({ request, auth, response }: HttpContext) {
-        const { fullName, password } = request.only(['fullName', 'password'])
+        const { username, password } = request.only(['username', 'password'])
         try {
-            const user = await User.verifyCredentials(fullName, password)
+            const user = await User.verifyCredentials(username, password)
             await auth.use('web').login(user)
             // response.redirect('/dashboard')
-            console.log(`Utilisateur connecté : ${user.fullName}`)
+            console.log(`Utilisateur connecté : ${user.username}`)
             return response.json({ message: 'Connexion réussie', user })
         } 
         catch (error: unknown) {
