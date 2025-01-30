@@ -7,11 +7,11 @@ export default class Event extends BaseSchema {
         this.schema.createTable(this.tableName, (table) => {
             table.uuid('id').primary()
             table.string('name').notNullable()
-            table.text('photo_url')
-            table.text('description')
-            table.date('date')
-            table.string('location')
-            table.string('reservation')
+            table.json('event_photos').nullable()
+            table.text('description').nullable()
+            table.date('date').nullable()
+            table.string('location').notNullable()
+            table.string('reservation').nullable
             table.timestamp('created_at').notNullable()
             table.timestamp('updated_at').nullable()
         })

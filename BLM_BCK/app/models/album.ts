@@ -4,7 +4,8 @@ import { DateTime } from 'luxon'
 import { randomUUID } from 'node:crypto'
 import type { HasMany, BelongsTo } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, beforeCreate, hasMany, belongsTo } from '@adonisjs/lucid/orm'
-
+import { attachment } from '@jrmc/adonis-attachment'
+import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 export default class Album extends BaseModel {
   static selfAssignPrimaryKey = true
 
@@ -22,8 +23,8 @@ export default class Album extends BaseModel {
   @column.date()
   declare date: DateTime
 
-  @column()
-  declare photoUrl: string | null
+  @attachment({ preComputeUrl: true })
+  declare cover: Attachment | null
 
   @hasMany(() => Track)
   declare tracksIds: HasMany<typeof Track>
@@ -32,7 +33,7 @@ export default class Album extends BaseModel {
   declare artistId: BelongsTo<typeof Artist>
 
   @column()
-  declare spotifyLink: string
+  declare spotifyLink: string | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -52,9 +52,9 @@
 
 <script setup >
   import { ref } from 'vue';
-  import CsrfHandler from '../components/CsrfHandler.vue';
-  import { blmApi } from '../lib/api'
-  import { useLogin } from '../composables/useLogin';
+  import CsrfHandler from '~/components/CsrfHandler.vue';
+  import { blmApi } from '~/lib/api'
+  import { useLogin } from '~/composables/useLogin';
 
   const { form, errorMessage, successMessage, handleSubmit } = useLogin();
 </script>

@@ -4,7 +4,8 @@ import Album from '#models/album'
 import { randomUUID } from 'node:crypto'
 import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, beforeCreate, hasMany, manyToMany} from '@adonisjs/lucid/orm'
-
+import { attachment } from '@jrmc/adonis-attachment'
+import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 export default class Artist extends BaseModel {
   static selfAssignPrimaryKey = true
 
@@ -20,25 +21,28 @@ export default class Artist extends BaseModel {
   declare name: string
 
   @column()
-  declare bio: string
+  declare bio: string | null
 
+  @attachment({ preComputeUrl: true })
+  declare avatar: Attachment | null
+  
   @hasMany(() => Album)
   declare albums: HasMany<typeof Album>
 
   @column()
-  declare genre: string
+  declare genre: string | null
 
   @column()
-  declare twitter: string
+  declare twitter: string | null
 
   @column()
-  declare insta: string
+  declare insta: string | null
 
   @column()
-  declare role: string
+  declare role: string | null
 
   @column()
-  declare videosUrls: string[]
+  declare videosUrls: string[] | null
 
   @manyToMany(() => Event)
   declare events: ManyToMany<typeof Event>

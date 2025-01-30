@@ -41,5 +41,17 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Variables for configuring the limiter package
   |----------------------------------------------------------
   */
-  LIMITER_STORE: Env.schema.enum(['database', 'memory'] as const)
+  LIMITER_STORE: Env.schema.enum(['database', 'memory'] as const),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the drive package
+  |----------------------------------------------------------
+  */
+  DRIVE_DISK: Env.schema.enum(['r2', 'fs'] as const),
+  
+  /*R2_KEY: Env.schema.string(),
+  R2_SECRET: Env.schema.string(),
+  R2_BUCKET: Env.schema.string(),
+  R2_ENDPOINT: Env.schema.string()*/
 })

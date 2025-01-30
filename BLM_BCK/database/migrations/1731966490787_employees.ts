@@ -5,13 +5,12 @@ export default class Employee extends BaseSchema {
 
     public async up () {
         this.schema.createTable(this.tableName, (table) => {
-            table.text('photo_url')
+            table.json('avatar').nullable()
             table.uuid('id').primary()
-            table.string('role').notNullable()
-            table.string('insta')
-            table.text('bio')
+            table.string('role').nullable()
+            table.string('insta').nullable()
+            table.text('bio').nullable()
             table.string('name').notNullable()
-
             table.timestamp('created_at').notNullable()
             table.timestamp('updated_at').nullable()
         })

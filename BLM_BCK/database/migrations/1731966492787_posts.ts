@@ -7,8 +7,9 @@ export default class Post extends BaseSchema {
         this.schema.createTable(this.tableName, (table) => {
             table.uuid('id').primary()
             table.string('title').notNullable()
-            table.text('body')
-            table.string('author')
+            table.text('body').notNullable()
+            table.string('author').notNullable()
+            table.json('post_photos').nullable()
             table.timestamp('created_at').notNullable()
             table.timestamp('updated_at').nullable()
         })

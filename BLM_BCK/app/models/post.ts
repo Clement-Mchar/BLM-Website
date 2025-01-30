@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
 import { randomUUID } from 'node:crypto'
 import { BaseModel, column, beforeCreate } from '@adonisjs/lucid/orm'
+import { attachment } from '@jrmc/adonis-attachment'
+import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 
 export default class Post extends BaseModel {
   static selfAssignPrimaryKey = true
@@ -12,6 +14,9 @@ export default class Post extends BaseModel {
   static assignUuid(post: Post) {
     post.id = randomUUID()
   }
+
+  @attachment({ preComputeUrl: true })
+  declare potsPhotos: Attachment | null
 
   @column()
   declare title: string

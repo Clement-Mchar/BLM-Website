@@ -1,6 +1,5 @@
 import ky from 'ky';
 import type { KyInstance } from 'ky';
-import { ref } from 'vue';
 
 class BlmApi {
   #client: KyInstance
