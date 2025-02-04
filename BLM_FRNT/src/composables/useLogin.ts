@@ -1,21 +1,20 @@
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { blmApi } from '../lib/api';
 
 export function useLogin() {
   const form = ref<{ username: string; password: string }>({ username: '', password: '' });
   const errorMessage = ref<string>('');
-  const successMessage = ref<string>('');
+  const router = useRouter();
 
-  async function handleSubmit(): Promise<void> {
+  async function handleSubmit() {
     try {
       await blmApi.login(form.value);
-      successMessage.value = 'Connexion réussie';
-      errorMessage.value = '';
+      router.push('/dashboard')
     } catch (error) {
       errorMessage.value = 'Identifiants incorrects';
-      successMessage.value = '';
     }
   }
 
-  return { form, errorMessage, successMessage, handleSubmit };
+  return { form, errorMessage, handleSubmit };
 }

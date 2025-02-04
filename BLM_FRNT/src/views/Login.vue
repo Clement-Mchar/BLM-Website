@@ -39,9 +39,6 @@
             </div>
 
           </form>
-          <div v-if="successMessage" class="text-green-500">
-            {{ successMessage }}
-          </div>
           <div v-if="errorMessage" class="text-red-500">
             {{ errorMessage }}
           </div>
@@ -50,13 +47,11 @@
     </div>
   </template>
 
-<script setup >
-  import { ref } from 'vue';
+<script setup lang="ts">
   import CsrfHandler from '~/components/CsrfHandler.vue';
-  import { blmApi } from '~/lib/api'
-  import { useLogin } from '~/composables/useLogin';
+  import { useLogin } from '../composables/useLogin';
 
-  const { form, errorMessage, successMessage, handleSubmit } = useLogin();
+  const { form, errorMessage, handleSubmit } = useLogin();
 </script>
   
 <style scoped>

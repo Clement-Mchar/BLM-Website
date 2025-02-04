@@ -1,9 +1,7 @@
 import ky from 'ky';
 import type { KyInstance } from 'ky';
-
 class BlmApi {
   #client: KyInstance
-
   #extractCsrfToken(request: Request) {
     const token = document.cookie
       ?.split("; ")
@@ -25,10 +23,10 @@ class BlmApi {
   }
 
   login(payload: {username: string; password: string}) {
-    return this.#client.post('login', {
-      json: payload,
-      credentials: 'include',
-    }).json();
+    return this.#client
+      .post('login', {
+        json: payload,
+      }).json();
   }
 
   getAlbums() {
