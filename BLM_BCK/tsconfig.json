@@ -1,13 +1,6 @@
 {
-<<<<<<< HEAD
   "extends": "@adonisjs/tsconfig/tsconfig.app.json",
   "compilerOptions": {
-=======
-  "allowImportingTsExtensions": true,
-  "extends": "@adonisjs/tsconfig/tsconfig.app.json",
-  "compilerOptions": {
-    "strict": true,
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
     "rootDir": "./",
     "outDir": "./build"
   }

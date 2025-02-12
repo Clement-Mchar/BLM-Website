@@ -36,11 +36,7 @@
     "@adonisjs/eslint-config": "^2.0.0-beta.6",
     "@adonisjs/prettier-config": "^1.4.0",
     "@adonisjs/tsconfig": "^1.4.0",
-<<<<<<< HEAD
     "@japa/assert": "^1.2.4",
-=======
-    "@japa/assert": "^4.0.1",
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
     "@japa/plugin-adonisjs": "^3.0.1",
     "@japa/runner": "^3.1.4",
     "@swc/core": "1.7.26",
@@ -55,12 +51,8 @@
     "vite": "^5.4.8"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@adonisjs/auth": "^9.2.4",
-=======
     "@adonisjs/auth": "^9.2.3",
-    "@adonisjs/bouncer": "^3.1.4",
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
+    "@adonisjs/bouncer": "^3.1.5",
     "@adonisjs/core": "^6.14.1",
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/drive": "^3.2.0",
@@ -70,22 +62,12 @@
     "@adonisjs/shield": "^8.1.1",
     "@adonisjs/static": "^1.1.1",
     "@adonisjs/vite": "^3.0.0",
-<<<<<<< HEAD
-    "@aws-sdk/client-s3": "^3.744.0",
-    "@aws-sdk/s3-request-presigner": "^3.744.0",
-=======
     "@aws-sdk/client-s3": "^3.738.0",
     "@aws-sdk/s3-request-presigner": "^3.738.0",
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
     "@jrmc/adonis-attachment": "^3.2.0",
     "@vinejs/vine": "^2.1.0",
     "edge.js": "^6.2.0",
     "luxon": "^3.5.0",
-<<<<<<< HEAD
-    "node-fetch": "^2.6.1",
-    "nodejs": "^0.0.0",
-=======
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2"
   },

@@ -10,11 +10,7 @@ export default defineConfig({
   | will be scanned automatically from the "./commands" directory.
   |
   */
-<<<<<<< HEAD
   commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/lucid/commands'), () => import('@jrmc/adonis-attachment/commands')],
-=======
-  commands: [() => import('@adonisjs/core/commands'), () => import('@adonisjs/lucid/commands'), () => import('@adonisjs/bouncer/commands'), () => import('@jrmc/adonis-attachment/commands')],
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
 
   /*
   |--------------------------------------------------------------------------
@@ -40,18 +36,10 @@ export default defineConfig({
     () => import('@adonisjs/static/static_provider'),
     () => import('@adonisjs/lucid/database_provider'),
     () => import('@adonisjs/auth/auth_provider'),
-<<<<<<< HEAD
     () => import('@jrmc/adonis-attachment/attachment_provider'),
     () => import('@adonisjs/cors/cors_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
     () => import('@adonisjs/drive/drive_provider')
-=======
-    () => import('@adonisjs/limiter/limiter_provider'),
-    () => import('@adonisjs/bouncer/bouncer_provider'),
-    () => import('@adonisjs/cors/cors_provider'),
-    () => import('@adonisjs/drive/drive_provider'),
-    () => import('@jrmc/adonis-attachment/attachment_provider')
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
   ],
 
   /*

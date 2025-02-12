@@ -10,9 +10,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-<<<<<<< HEAD
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "vite.config.ts"]
-=======
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
->>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
 }
