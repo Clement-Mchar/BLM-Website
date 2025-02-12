@@ -6,7 +6,7 @@
         </div>
         <div class="flex flex-col min-w-[40rem] min-h-[18rem] justify-between border-white border-solid border-2 p-3">
           <CsrfHandler />
-          <form class="min-h-41" @submit.prevent="handleSubmit">
+          <form class="min-h-40" @submit.prevent="handleSubmit">
             <div class="mb-4">
               <label for="username" class="block text-sm font-medium text-white">Pseudo</label>
               <input
