@@ -1,0 +1,23 @@
+import { BaseSchema } from '@adonisjs/lucid/schema'
+
+export default class Event extends BaseSchema {
+    protected tableName = 'events'
+
+    public async up () {
+        this.schema.createTable(this.tableName, (table) => {
+            table.uuid('id').primary()
+            table.string('name').notNullable()
+            table.json('event_photos').nullable()
+            table.text('description').nullable()
+            table.date('date').nullable()
+            table.string('location').notNullable()
+            table.string('reservation').nullable
+            table.timestamp('created_at').notNullable()
+            table.timestamp('updated_at').nullable()
+        })
+    }
+
+    public async down () {
+        this.schema.dropTable(this.tableName)
+    }
+}
