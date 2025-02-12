@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import 'tailwindcss';
 
 @theme {
@@ -21,6 +22,11 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+>>>>>>> 6bef9b5aefbf296d713b8c474db37d5565295330
 
 @font-face {
   font-family: 'Resolve';
