@@ -10,7 +10,7 @@ export default class Event extends BaseSchema {
             table.json('event_photos').nullable()
             table.text('description').nullable()
             table.date('date').nullable()
-            table.string('location').notNullable()
+            table.string('location').nullable()
             table.string('reservation').nullable
             table.timestamp('created_at').notNullable()
             table.timestamp('updated_at').nullable()
