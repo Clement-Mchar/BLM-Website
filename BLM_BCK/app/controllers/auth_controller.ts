@@ -12,4 +12,8 @@ export default class AuthController {
       return response.unauthorized({ message: 'Identifiants invalides' })
     }
   }
+  async logout({ auth, response }: HttpContext) {
+    await auth.use("web").logout()
+    return response.ok({ message : 'Déconnecté avec succès'})
+  }
 }

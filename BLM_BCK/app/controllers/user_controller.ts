@@ -4,4 +4,5 @@ export default class UserController {
   async getCurrentUser({ auth }: HttpContext) {
     return auth.getUserOrFail()
   }
+
 }

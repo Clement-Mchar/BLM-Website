@@ -16,3 +16,4 @@ router.on('/').render('pages/home')
 router.post('/api/login', [AuthController, 'store']).use(throttle)
 router.get('/api/auth/csrf-token', async () => {})
 router.get('/api/auth/me', [UserController, 'getCurrentUser'])
+router.post('/api/logout', [AuthController, 'logout']);
