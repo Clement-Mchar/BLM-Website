@@ -10,11 +10,11 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
+	const user = await blmApi.setCurrentUser();
+
+	if (user && to.meta.guestOnly) return { name: "dashboard" };
 	if (!to.meta.requiresAuth) return;
-	const user = await blmApi.getCurrentUser();
-	console.log("sex");
 	if (user) return;
-	if (!user) console.log("sexisex");
 	return { name: "login" };
 });
 

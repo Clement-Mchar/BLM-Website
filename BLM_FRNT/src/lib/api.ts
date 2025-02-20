@@ -1,5 +1,6 @@
-import  ky, { HTTPError } from "ky";
+import ky, { HTTPError } from "ky";
 import type { KyInstance } from "ky";
+import type { User } from "../types/User";
 class BlmApi {
 	#client: KyInstance;
 	#extractCsrfToken(request: Request) {
@@ -30,16 +31,25 @@ class BlmApi {
 			})
 			.json();
 	}
-	async getCurrentUser() {
-		try{
-			return await this.#client.get("auth/me").json();
-		}catch(e: unknown){
-			if (e instanceof HTTPError && e.response.status === 401){
+	logout() {
+		return this.#client.post("logout");
+	}
+	async getCurrentUser(): Promise<User | null> {
+		try {
+			return await this.#client.get("auth/me").json<User | null>();
+		} catch (e: unknown) {
+			if (e instanceof HTTPError && e.response.status === 401) {
 				return null;
 			}
+			throw e;
 		}
 	}
-	
+
+	async setCurrentUser(): Promise<User | null> {
+		const user = await this.getCurrentUser();
+
+		return user;
+	}
 
 	getAlbums() {
 		return this.#client.get("albums").json();
