@@ -12,8 +12,7 @@ export default class Event extends BaseSchema {
             table.date('date').nullable()
             table.string('location').nullable()
             table.string('reservation').nullable
-            table.timestamp('created_at').notNullable()
-            table.timestamp('updated_at').nullable()
+            table.timestamps(true)
         })
     }
 

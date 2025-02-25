@@ -10,8 +10,7 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
       table.enu('user_role', ["ADMIN", "WEBMASTER"]).notNullable()
       table.boolean('is_admin').notNullable()
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.timestamps(true)
     })
   }
   

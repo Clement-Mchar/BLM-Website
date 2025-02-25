@@ -13,6 +13,6 @@ export default class extends BaseSeeder {
     admin.userRole = UserRole.Admin
     admin.isAdmin = true
 
-    admin.save()
+    await admin.save()
   }
 }

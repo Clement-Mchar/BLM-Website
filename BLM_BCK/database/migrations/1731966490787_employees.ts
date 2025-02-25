@@ -11,8 +11,7 @@ export default class Employee extends BaseSchema {
             table.string('insta').nullable()
             table.text('bio').nullable()
             table.string('name').notNullable()
-            table.timestamp('created_at').notNullable()
-            table.timestamp('updated_at').nullable()
+            table.timestamps(true)
         })
     }
 

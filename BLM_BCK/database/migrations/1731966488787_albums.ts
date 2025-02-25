@@ -9,12 +9,10 @@ export default class Album extends BaseSchema {
             table.string('name').notNullable()
             table.date('date').nullable()
             table.json('cover').nullable()
-            table.uuid('tracks_ids').nullable()
-            table.uuid('artist_id').nullable()
             table.string('spotify_link').nullable()
-            table.timestamp('created_at').notNullable()
-            table.timestamp('updated_at').nullable()
+            table.timestamps(true)
         })
+
     }
 
     public async down () {

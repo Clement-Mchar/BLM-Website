@@ -2,12 +2,28 @@ import { DateTime } from 'luxon'
 import Event from '#models/event'
 import Album from '#models/album'
 import { randomUUID } from 'node:crypto'
-import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, beforeCreate, hasMany, manyToMany} from '@adonisjs/lucid/orm'
+import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, beforeCreate, manyToMany } from '@adonisjs/lucid/orm'
 import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
+import Track from './track.js'
 export default class Artist extends BaseModel {
   static selfAssignPrimaryKey = true
+
+  @manyToMany(() => Event, {
+    pivotTable: 'artists_events',
+  })
+  declare events: ManyToMany<typeof Event>
+
+  @manyToMany(() => Album, {
+    pivotTable: 'artists_albums',
+  })
+  declare albums: ManyToMany<typeof Album>
+
+  @manyToMany(() => Track, {
+    pivotTable: 'artists_tracks',
+  })
+  declare tracks: ManyToMany<typeof Track>
 
   @column({ isPrimary: true })
   declare id: string
@@ -25,9 +41,6 @@ export default class Artist extends BaseModel {
 
   @attachment({ preComputeUrl: true })
   declare avatar: Attachment | null
-  
-  @hasMany(() => Album)
-  declare albums: HasMany<typeof Album>
 
   @column()
   declare genre: string | null
@@ -43,9 +56,6 @@ export default class Artist extends BaseModel {
 
   @column()
   declare videosUrls: string[] | null
-
-  @manyToMany(() => Event)
-  declare events: ManyToMany<typeof Event>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

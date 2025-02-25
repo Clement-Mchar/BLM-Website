@@ -35,7 +35,9 @@ export default class Event extends BaseModel {
   @column()
   declare reservation: string | null
 
-  @manyToMany(() => Artist)
+  @manyToMany(() => Artist, {
+    pivotTable: 'artists_events',
+  })
   declare artists: ManyToMany<typeof Artist>
 
   @column.dateTime({ autoCreate: true })

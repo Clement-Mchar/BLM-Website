@@ -1,9 +1,11 @@
-import { UserRole }from '../enums.js'
+import { UserRole } from '../enums.js'
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
+import Post from './post.js'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['username'],
@@ -13,6 +15,9 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 export default class User extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true })
   declare id: number
+
+  @hasMany(() => Post)
+  declare posts: HasMany<typeof Post>
 
   @column()
   declare username: string
@@ -25,7 +30,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column()
   declare isAdmin: boolean
-  
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

@@ -2,11 +2,21 @@ import { DateTime } from 'luxon'
 import Album from '#models/album'
 import Artist from '#models/artist'
 import { randomUUID } from 'node:crypto'
-import { BaseModel, column, beforeCreate, belongsTo } from '@adonisjs/lucid/orm'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, beforeCreate, manyToMany } from '@adonisjs/lucid/orm'
+import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 
 export default class Track extends BaseModel {
   static selfAssignPrimaryKey = true
+
+  @manyToMany(() => Album, {
+    pivotTable: 'albums_tracks',
+  })
+  declare albums: ManyToMany<typeof Album>
+
+  @manyToMany(() => Artist, {
+    pivotTable: 'artists_tracks',
+  })
+  declare artists: ManyToMany<typeof Artist>
 
   @column({ isPrimary: true })
   declare id: string
@@ -24,12 +34,6 @@ export default class Track extends BaseModel {
 
   @column()
   declare photoUrl: string | null
-
-  @belongsTo(() => Album)
-  declare albumid: BelongsTo<typeof Album>
-
-  @belongsTo(() => Artist)
-  declare artistId: BelongsTo<typeof Artist>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -8,10 +8,9 @@ export default class Post extends BaseSchema {
             table.uuid('id').primary()
             table.string('title').notNullable()
             table.text('body').notNullable()
-            table.string('author').notNullable()
+            table.integer('user_id').notNullable().unsigned().references('users.id').onDelete('CASCADE')
             table.json('post_photos').nullable()
-            table.timestamp('created_at').notNullable()
-            table.timestamp('updated_at').nullable()
+            table.timestamps(true)
         })
     }
 

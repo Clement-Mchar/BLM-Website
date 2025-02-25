@@ -1,12 +1,22 @@
-import Track from '#models/track'
-import Artist from '#models/artist'
 import { DateTime } from 'luxon'
 import { randomUUID } from 'node:crypto'
-import type { HasMany, BelongsTo } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, beforeCreate, hasMany, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, beforeCreate, manyToMany } from '@adonisjs/lucid/orm'
 import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
+import Artist from './artist.js'
+import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import Track from './track.js'
 export default class Album extends BaseModel {
+  @manyToMany(() => Artist, {
+    pivotTable: 'artists_albums',
+  })
+  declare artists: ManyToMany<typeof Artist>
+
+  @manyToMany(() => Track, {
+    pivotTable: 'albums_tracks',
+  })
+  declare tracks: ManyToMany<typeof Track>
+
   static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
@@ -16,7 +26,7 @@ export default class Album extends BaseModel {
   static assignUuid(album: Album) {
     album.id = randomUUID()
   }
-  
+
   @column()
   declare name: string
 
@@ -25,12 +35,6 @@ export default class Album extends BaseModel {
 
   @attachment({ preComputeUrl: true })
   declare cover: Attachment | null
-
-  @hasMany(() => Track)
-  declare tracksIds: HasMany<typeof Track>
-
-  @belongsTo (() => Artist)
-  declare artistId: BelongsTo<typeof Artist>
 
   @column()
   declare spotifyLink: string | null
