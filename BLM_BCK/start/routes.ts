@@ -13,7 +13,10 @@ const UserController = () => import('#controllers/user_controller')
 const AuthController = () => import('#controllers/auth_controller')
 
 router.on('/').render('pages/home')
-router.post('/api/login', [AuthController, 'store']).use(throttle)
-router.get('/api/auth/csrf-token', async () => {})
-router.get('/api/auth/me', [UserController, 'getCurrentUser'])
-router.post('/api/logout', [AuthController, 'logout']);
+router.group(() => {
+router.post('/login', [AuthController, 'login']).use(throttle);
+router.get('/auth/csrf-token', async () => {});
+router.get('/auth/me', [AuthController, 'getCurrentUser']);
+router.post('logout', [AuthController, 'logout']);
+router.resource('users', UserController);})
+.prefix('api')
