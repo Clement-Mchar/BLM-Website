@@ -1,6 +1,6 @@
 import ky, { HTTPError } from "ky";
 import type { KyInstance } from "ky";
-import type { User } from "../types/User";
+import type { User } from "@/types/User";
 class BlmApi {
 	#client: KyInstance;
 	#extractCsrfToken(request: Request) {

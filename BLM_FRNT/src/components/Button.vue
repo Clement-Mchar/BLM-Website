@@ -1,7 +1,7 @@
 <template>
 	<button
 		:type="type"
-		:class="class"
+		:class="className"
 		@click="$emit('action')"
 	>
 		{{ text }}
@@ -19,7 +19,7 @@ defineProps({
 		type: String as () => "button" | "submit" | "reset",
 		default: "button",
 	},
-	class: {
+	className: {
 		type: String,
 		required: false
 	}

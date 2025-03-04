@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import authRoutes from "./routes/auth";
-import dashboardRoutes from "./routes/dashboard";
-import { blmApi } from "../lib/api";
+import authRoutes from "@/router/routes/auth";
+import dashboardRoutes from "@/router/routes/dashboard";
+import { blmApi } from "@/services/api";
 const routes = [...authRoutes, ...dashboardRoutes];
 
 const router = createRouter({

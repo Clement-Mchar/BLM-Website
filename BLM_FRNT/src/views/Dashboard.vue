@@ -22,10 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import Layout from '~/components/Layout.vue';
-import CsrfHandler from '~/components/CsrfHandler.vue';
-import Navbar from '../components/Navbar.vue';
-import DashboardTile from '../components/DashboardTile.vue';
+import Layout from '@components/Layout.vue';
+import CsrfHandler from '@components/CsrfHandler.vue';
+import Navbar from '@components/Navbar.vue';
+import DashboardTile from '@components/DashboardTile.vue';
 </script>
 
 <style scoped>

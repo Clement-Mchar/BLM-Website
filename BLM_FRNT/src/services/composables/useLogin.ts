@@ -1,8 +1,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { blmApi } from '../lib/api';
+import { blmApi } from '@/services/api';
 
-export function useLogin() {
+export default function useLogin() {
   const form = ref<{ username: string; password: string }>({ username: '', password: '' });
   const errorMessage = ref<string>('');
   const router = useRouter();

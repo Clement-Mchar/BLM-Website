@@ -30,7 +30,7 @@
           </div>
           <div class="flex flex-row justify-between">
             <div></div>
-            <Button class=" text-center w-60 mt-1 h-26 text-5xl bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-hidden focus:ring-3 focus:ring-indigo-200" @click="handleSubmit" text="Go"/>
+            <Button className=" text-center w-60 mt-1 h-26 text-5xl bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-hidden focus:ring-3 focus:ring-indigo-200" @click="handleSubmit" text="Go"/>
             <div></div>
           </div>
         </form>
@@ -43,10 +43,10 @@
   </template>
 
 <script setup lang="ts">
-  import CsrfHandler from '~/components/CsrfHandler.vue';
-  import { useLogin } from '../composables/useLogin';
-  import Button from '~/components/Button.vue';
-  import Layout from '~/components/Layout.vue';
+  import CsrfHandler from '@components/CsrfHandler.vue';
+  import useLogin from '@/services/composables/useLogin';
+  import Button from '@components/Button.vue';
+  import Layout from '@components/Layout.vue';
 
   const { form, errorMessage, handleSubmit } = useLogin();
 </script>
