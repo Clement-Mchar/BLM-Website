@@ -8,6 +8,7 @@ export function useAuth() {
             const user = await blmApi.setCurrentUser();
             return user;
         },
-        retry: false
+        retry: false,
+        staleTime: 1000 * 60 * 5,
     })
 }
