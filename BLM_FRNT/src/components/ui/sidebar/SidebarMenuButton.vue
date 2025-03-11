@@ -30,8 +30,8 @@ const delegatedProps = computed(() => {
   </SidebarMenuButtonChild>
 
   <Tooltip v-else>
-    <TooltipTrigger class="" as-child>
-      <SidebarMenuButtonChild class="" v-bind="{ ...delegatedProps, ...$attrs }">
+    <TooltipTrigger class="text-white" as-child>
+      <SidebarMenuButtonChild class="text-white" v-bind="{ ...delegatedProps, ...$attrs }">
         <slot />
       </SidebarMenuButtonChild>
     </TooltipTrigger>

@@ -173,7 +173,7 @@ const data = {
 
     <Sidebar v-bind="props" class="absolute ">
       <Layout>
-      <SidebarContent class=" " >
+      <SidebarContent >
         <NavMain :items="data.navMain" />
       </SidebarContent>
       <SidebarRail />
