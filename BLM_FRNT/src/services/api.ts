@@ -34,7 +34,7 @@ class BlmApi {
 	logout() {
 		return this.#client.post("logout");
 	}
-	async getCurrentUser(): Promise<User | null> {
+	private async getCurrentUser(): Promise<User | null> {
 		try {
 			return await this.#client.get("auth/me").json<User | null>();
 		} catch (e: unknown) {
@@ -46,6 +46,7 @@ class BlmApi {
 	}
 
 	async setCurrentUser(): Promise<User | null> {
+	
 		const user = await this.getCurrentUser();
 
 		return user;
