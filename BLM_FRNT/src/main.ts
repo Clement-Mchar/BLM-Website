@@ -6,5 +6,5 @@ import { VueQueryPlugin  } from '@tanstack/vue-query'
 
 createApp(App)
   .use(router)
-  .use(VueQueryPlugin)
+  .use(VueQueryPlugin, { enableDevtoolsV6Plugin: true})
   .mount('#app')

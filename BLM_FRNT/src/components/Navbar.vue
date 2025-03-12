@@ -1,5 +1,4 @@
 <template>
-    <CsrfHandler />
         <div class=" flex flex-row justify-between items-center p-w-screen border-b-white border-solid border-b-2 pb-2">
             <h2 class="text-[26px] pl-1">User : {{ auth?.username }}</h2>
             <RouterLink to="/dashboard" class=" text-4xl text-center hover:bg-gray-700 rounded-lg p-2">BACK-OFFICE</RouterLink>
@@ -9,7 +8,6 @@
 
 <script setup lang="ts">
 import Button from '~/components/Button.vue';
-import CsrfHandler from './CsrfHandler.vue';
 import { RouterLink } from 'vue-router';
 import { useLogout } from '../services/composables/useLogout';
 import { useAuth } from '../services/queries/users'

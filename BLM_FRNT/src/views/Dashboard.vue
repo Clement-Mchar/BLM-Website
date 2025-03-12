@@ -2,14 +2,18 @@
 	<Layout>
 		<CsrfHandler />
 		<Navbar />
-		<div class="flex justify-between flex-col items-center h-screen relative overflow-hidden">
-            <div></div>
+		<div
+			class="flex justify-between flex-col items-center h-screen relative overflow-hidden"
+		>
+			<div></div>
+
 			<SidebarProvider>
 				<AppSidebar class="text-white" />
-                <main>
-                    <SidebarTrigger />
-                </main>
+				<main>
+					<SidebarTrigger />
+				</main>
 			</SidebarProvider>
+
 			<div></div>
 		</div>
 	</Layout>
