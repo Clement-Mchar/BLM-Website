@@ -1,12 +1,11 @@
 <template>
-<div class="min-h-screen text-white font-resolve bg-gray-900 w-full flex flex-col">
+  <div
+    class="min-h-screen text-white font-resolve bg-gray-900 w-full flex flex-col"
+  >
     <slot></slot>
-</div>
+  </div>
 </template>
 
-<script>
+<script></script>
 
-</script>
-
-<style>
-</style>
+<style></style>

@@ -11,7 +11,7 @@ export function useLogout() {
     },
     onSuccess: () => {
       queryClient.setQueryData(["auth"], null);
-      router.push({ name: "login"})
+      router.push({ name: "login" });
     },
   });
 }
