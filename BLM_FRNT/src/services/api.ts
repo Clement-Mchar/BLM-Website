@@ -1,6 +1,7 @@
 import ky, { HTTPError } from "ky";
 import type { KyInstance } from "ky";
-import type { User } from "@/interfaces/userInterface";
+import type { User } from "@/interfaces/User";
+import type { Album } from "@/interfaces/Album";
 class BlmApi {
   #client: KyInstance;
   #extractCsrfToken(request: Request) {
@@ -31,6 +32,7 @@ class BlmApi {
       })
       .json();
   }
+
   logout() {
     return this.#client.post("logout");
   }
@@ -51,8 +53,12 @@ class BlmApi {
     return user;
   }
 
-  getAlbums() {
+  getAlbums(): Promise<Album[]>{
     return this.#client.get("albums").json();
+  }
+
+  async getUsers(): Promise<User[]> {
+    return await this.#client.get("users").json();
   }
 
   getArtists() {

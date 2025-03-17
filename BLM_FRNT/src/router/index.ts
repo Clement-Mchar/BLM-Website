@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import authRoutes from "@/router/routes/authRoutes";
-import backofficeRoutes from "@/router/routes/backOfficeRoutes";
+import authRoutes from "@/router/routes/auth-routes";
+import backofficeRoutes from "@/router/routes/back-office-routes";
 import { useQueryClient } from "@tanstack/vue-query";
 import { blmApi } from "@/services/api";
 
