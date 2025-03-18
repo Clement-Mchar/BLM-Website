@@ -5,15 +5,19 @@
     <div
       class="flex justify-between flex-row items-center h-screen relative overflow-hidden"
     >
-    
       <SidebarProvider>
         <AppSidebar class="text-white" />
         <main>
           <SidebarTrigger />
         </main>
       </SidebarProvider>
-      <div class="h-full w-full"><UsersTable v-if="isUsersPage" /></div>
-      
+      <div class="h-full w-full">
+        <GenericTable
+          v-if="isUsersPage"
+          :useQueryFn="useUsers"
+          :columns="userColumns"
+        />
+      </div>
     </div>
   </Layout>
 </template>
@@ -25,9 +29,12 @@ import Navbar from "@components/NavHeader.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { useRoute } from "vue-router";
-import UsersTable from "@components/users/UsersTable.vue";
+import { useUsers } from "@/services/queries/useUsers";
+import GenericTable from "@components/users/GenericTable.vue";
+import { columns as userColumns } from "@/components/users/columns";
+import { computed } from "vue";
 const route = useRoute();
-const isUsersPage = route.path.includes("users");
+const isUsersPage = computed(() => route.path.includes("users"));
 </script>
 
 <style scoped></style>
