@@ -15,12 +15,12 @@ router.beforeEach(async (to) => {
   const queryClient = useQueryClient();
   let user = queryClient.getQueryData(["auth"]);
 
+  if (user && to.meta.guestOnly) return { name: "back-office" };
   if (!user && !to.meta.requiresAuth) return;
   if (!user) {
     user = await blmApi.setCurrentUser();
     queryClient.setQueryData(["auth"], user);
   }
-  if (user && to.meta.guestOnly) return { name: "back-office" };
 
   if (user) return;
   return { name: "login" };

@@ -53,7 +53,7 @@ class BlmApi {
     return user;
   }
 
-  getAlbums(): Promise<Album[]>{
+  getAlbums(): Promise<Album[]> {
     return this.#client.get("albums").json();
   }
 
