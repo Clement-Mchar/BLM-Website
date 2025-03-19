@@ -8,6 +8,7 @@ export function useUsers() {
       const users = await blmApi.getUsers();
       return users || [];
     },
+    retry: false,
     staleTime: 1000 * 60 * 5,
   });
 }
