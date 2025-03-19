@@ -9,6 +9,8 @@
 
 import router from '@adonisjs/core/services/router'
 import { throttle } from '#start/limiter'
+import { middleware } from '#start/kernel'
+
 const UserController = () => import('#controllers/user_controller')
 const AuthController = () => import('#controllers/auth_controller')
 
@@ -18,5 +20,5 @@ router.post('/login', [AuthController, 'login']).use(throttle);
 router.get('/auth/csrf-token', async () => {});
 router.get('/auth/me', [AuthController, 'getCurrentUser']);
 router.post('logout', [AuthController, 'logout']);
-router.resource('users', UserController);})
+router.resource('users', UserController).use('*', middleware.auth()) ;})
 .prefix('api')
