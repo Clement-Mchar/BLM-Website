@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('username').unique().notNullable()
       table.string('password').notNullable()
       table.enu('user_role', ["ADMIN", "WEBMASTER"]).notNullable()
-      table.boolean('is_admin').notNullable()
+      table.boolean('is_admin').defaultTo(false).notNullable()
       table.timestamps(true)
     })
   }
