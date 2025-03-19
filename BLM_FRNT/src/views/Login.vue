@@ -19,13 +19,13 @@
             >
             <input
               id="username"
-              type="username"
+              type="text"
               v-model="form.username"
               required
               class="mt-1 block w-full h-16 p-2 text-2xl text-black bg-slate-300 focus:border rounded-lg shadow-xs focus:outline-hidden focus:ring-indigo-500 focus:border-indigo-500"
+              aria-label="nom d'utilisateur"
+              autocomplete="username"
             />
-          </div>
-          <div class="mb-4">
             <label
               for="password"
               class="mt-8 pb-2 block text-3xl font-medium text-white"
