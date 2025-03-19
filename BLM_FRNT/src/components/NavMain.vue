@@ -59,9 +59,9 @@ defineProps<{
                 :key="subItem.title"
               >
                 <SidebarMenuSubButton as-child class="hover:bg-gray-700">
-                  <a :href="subItem.url">
+                  <router-link  :to="subItem.url">
                     <span class="text-white">{{ subItem.title }}</span>
-                  </a>
+                  </router-link>
                 </SidebarMenuSubButton>
               </SidebarMenuSubItem>
             </SidebarMenuSub>
