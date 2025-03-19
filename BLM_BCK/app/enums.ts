@@ -1,6 +1,4 @@
-enum UserRole {
-    Admin = 'ADMIN',
-    Webmaster = 'WEBMASTER'
-  }
-
-  export { UserRole }
+export enum UserRole {
+  Admin = 'ADMIN',
+  Webmaster = 'WEBMASTER',
+}
