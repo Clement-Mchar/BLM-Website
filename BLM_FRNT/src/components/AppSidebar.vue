@@ -32,7 +32,7 @@ const data = {
         },
         {
           title: "Create User",
-          url: "#",
+          url: "/back-office/users/create",
         },
       ],
     },
