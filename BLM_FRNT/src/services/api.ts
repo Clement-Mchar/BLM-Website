@@ -2,6 +2,8 @@ import ky, { HTTPError } from "ky";
 import type { KyInstance } from "ky";
 import type { User } from "@/interfaces/User";
 import type { Album } from "@/interfaces/Album";
+
+
 class BlmApi {
   #client: KyInstance;
   #extractCsrfToken(request: Request) {
@@ -53,6 +55,12 @@ class BlmApi {
     return user;
   }
 
+  createUser(payload: { username: string; password: string; role: string }): Promise<User | null> {
+    return this.#client.post("users", { json: payload }).json();
+  }
+  deleteUser(id: number): Promise<User | null> {
+    return this.#client.delete(`users/${id}`).json()
+  }
   getAlbums(): Promise<Album[]> {
     return this.#client.get("albums").json();
   }
