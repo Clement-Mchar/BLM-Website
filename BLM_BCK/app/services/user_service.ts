@@ -1,25 +1,27 @@
 import User from '#models/user'
-import { HttpContext } from '@adonisjs/core/http'
 import { UserRole } from '../enums.js'
 import { inject } from '@adonisjs/core'
 
 @inject()
 export class UserService {
-  constructor(private ctx: HttpContext) {}
   async all() {
     const users = await User.all()
     return users
   }
 
-  async create() {
+  async store(data: { username: string; password: string; role: string }) {
     const user = new User()
-    const role = this.ctx.request.input('role')
-    if (!Object.values(UserRole).includes(role)) throw new Error('Invalid role')
-    user.username = this.ctx.request.input('username')
-    user.password = this.ctx.request.input('password')
-    user.userRole = role
-    user.isAdmin = role === UserRole.Admin
+    user.username = data.username
+    user.password = data.password
+    user.userRole = data.role as UserRole
+    user.isAdmin = data.role === UserRole.Admin
+
     await user.save()
     return user
+  }
+  async destroy(id: number) {
+    const user = await User.findOrFail(id)
+    await user.delete()
+    return
   }
 }
