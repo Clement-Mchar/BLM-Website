@@ -13,7 +13,7 @@ export default class extends BaseSchema {
       table.timestamps(true)
     })
   }
-  
+
   public async down () {
     this.schema.dropTable(this.tableName)
 }
