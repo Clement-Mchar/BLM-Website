@@ -31,9 +31,20 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare isAdmin: boolean
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({
+    autoCreate: true,
+    serialize: (value: DateTime | null) => {
+      return value ? value.setZone('utc').toFormat('dd/MM/yyyy HH:mm') : value
+    },
+  })
   declare createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({
+    autoCreate: true,
+    autoUpdate: true,
+    serialize: (value: DateTime | null) => {
+      return value ? value.setZone('utc').toFormat('dd/MM/yyyy HH:mm') : value
+    },
+  })
   declare updatedAt: DateTime | null
 }
