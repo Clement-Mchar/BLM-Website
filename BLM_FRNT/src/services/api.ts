@@ -3,7 +3,6 @@ import type { KyInstance } from "ky";
 import type { User } from "@/interfaces/User";
 import type { Album } from "@/interfaces/Album";
 
-
 class BlmApi {
   #client: KyInstance;
   #extractCsrfToken(request: Request) {
@@ -38,6 +37,7 @@ class BlmApi {
   logout() {
     return this.#client.post("logout");
   }
+
   private async getCurrentUser(): Promise<User | null> {
     try {
       return await this.#client.get("auth/me").json<User | null>();
@@ -58,9 +58,19 @@ class BlmApi {
   createUser(payload: { username: string; password: string; role: string }): Promise<User | null> {
     return this.#client.post("users", { json: payload }).json();
   }
+  
   deleteUser(id: number): Promise<User | null> {
-    return this.#client.delete(`users/${id}`).json()
+    return this.#client.delete(`users/${id}`).json();
   }
+
+  getUserEdit(id: number): Promise<User | null> {
+    return this.#client.get(`users/${id}/edit`).json();
+  }
+
+  editUser(id: number, payload: Partial<User>): Promise<User> {
+    return this.#client.patch(`users/${id}`, { json: payload }).json();
+  }
+
   getAlbums(): Promise<Album[]> {
     return this.#client.get("albums").json();
   }

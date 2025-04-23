@@ -49,7 +49,7 @@
     </div>
     <div class="flex items-center justify-end py-4 space-x-2">
       <Button
-        variant="outline"
+        variant="secondary"
         size="sm"
         :disabled="!table.getCanPreviousPage()"
         @click="table.previousPage()"
@@ -57,7 +57,7 @@
         Previous
       </Button>
       <Button
-        variant="outline"
+        variant="secondary"
         size="sm"
         :disabled="!table.getCanNextPage()"
         @click="table.nextPage()"
@@ -84,7 +84,7 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-
+import { Button } from "@/components/ui/button";
 import { valueUpdater } from "@/lib/utils";
 import { ref } from "vue";
 

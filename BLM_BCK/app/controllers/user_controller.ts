@@ -1,6 +1,6 @@
 import { inject } from '@adonisjs/core'
 import { UserService } from '#services/user_service'
-import { createUserValidator } from '#validators/user'
+import { createUserValidator, updateUserValidator } from '#validators/user'
 import { HttpContext } from '@adonisjs/core/http'
 @inject()
 export default class UserController {
@@ -17,5 +17,15 @@ export default class UserController {
   async destroy({ params }: HttpContext) {
     const id = params.id
     return this.userService.destroy(id)
+  }
+  async edit({ params }: HttpContext) {
+    const id = params.id
+    return this.userService.edit(id)
+  }
+
+  async update({ request, params }: HttpContext) {
+    const id = params.id
+    const data = await request.validateUsing(updateUserValidator)
+    return this.userService.update(id, data)
   }
 }

@@ -6,6 +6,7 @@ import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import Artist from './artist.js'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 import Track from './track.js'
+
 export default class Album extends BaseModel {
   @manyToMany(() => Artist, {
     pivotTable: 'artists_albums',

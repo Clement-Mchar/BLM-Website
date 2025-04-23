@@ -2,11 +2,15 @@
   <DropdownMenu v-model:open="isOpen">
     <DropdownMenuTrigger><Settings :size="22" class="mt-2" /> </DropdownMenuTrigger>
     <DropdownMenuContent>
-      <ConfirmDialog title="Are you sure ?" message="This action cannot be undone" @confirm="deleteUser">
-        <Button variant="ghost">Delete</Button>
+      <ConfirmDialog asChild title="Are you sure ?" message="This action cannot be undone" @confirm="deleteUser">
+        <Button variant="destructive">Delete</Button>
       </ConfirmDialog>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>Edit</DropdownMenuItem>
+      <DropdownMenuItem asChild>
+        <router-link :to="{ name: 'edit-user', params: { id: props.user.id } }">
+          <Button variant="ghost" class="w-full justify-start">Edit</Button>
+        </router-link>
+      </DropdownMenuItem>
       <DropdownMenuSeparator />
     </DropdownMenuContent>
   </DropdownMenu>
@@ -16,7 +20,7 @@
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Settings } from "lucide-vue-next";
-import { defineProps, ref } from "vue";
+import { ref } from "vue";
 import { useDeleteUser } from "@/services/queries/useUsers";
 import { Button } from "@/components/ui/button";
 import { useQueryClient } from "@tanstack/vue-query";

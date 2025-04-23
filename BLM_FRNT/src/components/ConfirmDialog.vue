@@ -20,7 +20,7 @@ defineProps<{
 
 <template>
   <AlertDialog>
-    <AlertDialogTrigger as-child><slot /></AlertDialogTrigger>
+    <AlertDialogTrigger><slot /></AlertDialogTrigger>
     <AlertDialogContent>
       <AlertDialogHeader>
         <AlertDialogTitle> {{ title }}</AlertDialogTitle>
@@ -30,9 +30,7 @@ defineProps<{
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction @click="$emit('confirm')"
-          >Continue</AlertDialogAction
-        >
+        <AlertDialogAction @click="$emit('confirm')">Continue</AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>
