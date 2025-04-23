@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import authRoutes from "@/router/routes/auth-routes";
 import backofficeRoutes from "@/router/routes/back-office-routes";
-import { useQueryClient } from "@tanstack/vue-query";
 import { blmApi } from "@/services/api";
 
 const routes = [...authRoutes, ...backofficeRoutes];
@@ -12,15 +11,11 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const queryClient = useQueryClient();
-  let user = queryClient.getQueryData(["auth"]);
+  const user = await blmApi.setCurrentUser();
+
 
   if (user && to.meta.guestOnly) return { name: "back-office" };
   if (!user && !to.meta.requiresAuth) return;
-  if (!user) {
-    user = await blmApi.setCurrentUser();
-    queryClient.setQueryData(["auth"], user);
-  }
 
   if (user) return;
   return { name: "login" };
