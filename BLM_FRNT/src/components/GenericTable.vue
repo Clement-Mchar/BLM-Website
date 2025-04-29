@@ -1,11 +1,12 @@
-<script setup lang="ts">
-import { columns } from "@/components/users/columns";
+<script setup lang="ts" generic="TData, TValue">
+import type { ColumnDef } from "@tanstack/vue-table";
 import DataTable from "@components/DataTable.vue";
+import type { UseQueryReturnType } from "@tanstack/vue-query";
 import { computed } from "vue";
 
 const props = defineProps<{
-  useQueryFn: () => any;
-  columns: any;
+  useQueryFn: () => UseQueryReturnType<TData, Error>;
+  columns: ColumnDef<TData, TValue>[];
 }>();
 
 const queryResult = computed(() => props.useQueryFn());
@@ -17,9 +18,7 @@ const data = computed(() => fetchedData.value ?? []);
 <template>
   <div class="container py-10 mx-auto flex justify-center">
     <div v-if="isLoading" class="text-center">Loading...</div>
-    <div v-if="isError" class="text-center text-red-500">
-      Error: {{ error?.message }}
-    </div>
+    <div v-if="isError" class="text-center text-red-500">Error: {{ error?.message }}</div>
     <DataTable :columns="columns" :data="data" />
   </div>
 </template>
