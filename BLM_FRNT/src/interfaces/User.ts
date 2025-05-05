@@ -6,3 +6,18 @@ export interface User {
   createdAt: string;
   updatedAt: string | null;
 }
+
+export interface CreateUserPayload {
+  username: string; 
+  passwordConfirmation: { 
+    password: string; 
+    confirmPassword: string 
+  };
+  role: string 
+}
+export interface ConfirmUserPayload {
+  username: string; 
+  password: string;
+  password_confirmation: string;
+  role: string 
+}
