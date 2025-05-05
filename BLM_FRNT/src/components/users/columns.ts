@@ -2,9 +2,27 @@ import { h } from "vue";
 import type { User } from "@/interfaces/User";
 import type { ColumnDef } from "@tanstack/vue-table";
 import { ArrowUpDown } from "lucide-vue-next";
-import DropdownAction from '@/components/DataTableDropDown.vue'
+import DropdownAction from "@/components/DataTableDropDown.vue";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "../ui/checkbox";
 export const columns: ColumnDef<User>[] = [
+  {
+    id: "select",
+    header: ({ table }) =>
+      h(Checkbox, {
+        modelValue: table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate"),
+        "onUpdate:modelValue": (value) => table.toggleAllPageRowsSelected(!!value),
+        ariaLabel: "Select all",
+      }),
+    cell: ({ row }) =>
+      h(Checkbox, {
+        modelValue: row.getIsSelected(),
+        "onUpdate:modelValue": (value) => row.toggleSelected(!!value),
+        ariaLabel: "Select row",
+      }),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -20,6 +38,7 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => h("div", { class: "lowercase" }, row.getValue("id")),
     enableSorting: true,
   },
+
   {
     accessorKey: "username",
     header: () => h("span", "Username"),
@@ -41,14 +60,18 @@ export const columns: ColumnDef<User>[] = [
     header: () => h("span", "Updated at"),
   },
   {
-    id: 'actions',
+    id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const user = row.original
+      const user = row.original;
 
-      return h('div', { class: 'relative' }, h(DropdownAction, {
-        user,
-      }))
+      return h(
+        "div",
+        { class: "relative" },
+        h(DropdownAction, {
+          user,
+        }),
+      );
     },
-  }
+  },
 ];
