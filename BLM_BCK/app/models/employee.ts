@@ -1,10 +1,11 @@
-import { DateTime } from 'luxon'
+import { WithTime } from '../mixins/with_time.js'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { beforeCreate } from '@adonisjs/lucid/orm'
 import { randomUUID } from 'node:crypto'
 import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
-export default class Employee extends BaseModel {
+import { compose } from '@adonisjs/core/helpers'
+export default class Employee extends compose(BaseModel, WithTime) {
 
   static selfAssignPrimaryKey = true
 
@@ -30,10 +31,4 @@ export default class Employee extends BaseModel {
 
   @attachment({ preComputeUrl: true })
   declare avatar: Attachment | null
-  
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
 }

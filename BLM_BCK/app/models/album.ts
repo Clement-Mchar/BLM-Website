@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon'
+import { WithTime } from '../mixins/with_time.js'
 import { randomUUID } from 'node:crypto'
 import { BaseModel, column, beforeCreate, manyToMany } from '@adonisjs/lucid/orm'
 import { attachment } from '@jrmc/adonis-attachment'
@@ -6,8 +7,9 @@ import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import Artist from './artist.js'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 import Track from './track.js'
+import { compose } from '@adonisjs/core/helpers'
 
-export default class Album extends BaseModel {
+export default class Album extends compose(BaseModel, WithTime) {
   @manyToMany(() => Artist, {
     pivotTable: 'artists_albums',
   })

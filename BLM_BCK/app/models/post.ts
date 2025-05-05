@@ -1,12 +1,13 @@
-import { DateTime } from 'luxon'
+import { WithTime } from '../mixins/with_time.js'
 import { randomUUID } from 'node:crypto'
 import { BaseModel, column, beforeCreate, belongsTo } from '@adonisjs/lucid/orm'
 import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import User from './user.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { compose } from '@adonisjs/core/helpers'
 
-export default class Post extends BaseModel {
+export default class Post extends compose(BaseModel, WithTime) {
   static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
@@ -18,7 +19,7 @@ export default class Post extends BaseModel {
   }
 
   @belongsTo(() => User)
-  declare author : BelongsTo<typeof User>
+  declare author: BelongsTo<typeof User>
 
   @attachment({ preComputeUrl: true })
   declare potsPhotos: Attachment | null
@@ -28,10 +29,4 @@ export default class Post extends BaseModel {
 
   @column()
   declare body: string
-
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
 }

@@ -1,11 +1,12 @@
-import { DateTime } from 'luxon'
+import { WithTime } from '../mixins/with_time.js'
 import Album from '#models/album'
 import Artist from '#models/artist'
 import { randomUUID } from 'node:crypto'
 import { BaseModel, column, beforeCreate, manyToMany } from '@adonisjs/lucid/orm'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import { compose } from '@adonisjs/core/helpers'
 
-export default class Track extends BaseModel {
+export default class Track extends compose(BaseModel, WithTime) {
   static selfAssignPrimaryKey = true
 
   @manyToMany(() => Album, {
@@ -34,10 +35,4 @@ export default class Track extends BaseModel {
 
   @column()
   declare photoUrl: string | null
-
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
 }

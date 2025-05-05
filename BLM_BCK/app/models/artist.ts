@@ -1,4 +1,5 @@
-import { DateTime } from 'luxon'
+
+import { WithTime } from '../mixins/with_time.js'
 import Event from '#models/event'
 import Album from '#models/album'
 import { randomUUID } from 'node:crypto'
@@ -7,7 +8,8 @@ import { BaseModel, column, beforeCreate, manyToMany } from '@adonisjs/lucid/orm
 import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import Track from './track.js'
-export default class Artist extends BaseModel {
+import { compose } from '@adonisjs/core/helpers'
+export default class Artist extends compose(BaseModel, WithTime) {
   static selfAssignPrimaryKey = true
 
   @manyToMany(() => Event, {
@@ -57,9 +59,4 @@ export default class Artist extends BaseModel {
   @column()
   declare videosUrls: string[] | null
 
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
 }
