@@ -15,6 +15,7 @@ const { error, formItemId } = useFormField()
     :class="cn(
       error && 'text-destructive',
       props.class,
+      'text-xl flex place-self-center mt-1'
     )"
     :for="formItemId"
   >
