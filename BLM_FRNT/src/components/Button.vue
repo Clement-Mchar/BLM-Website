@@ -1,24 +1,16 @@
 <template>
-  <button :type="type" :class="className" @click="$emit('action')">
-    {{ text }}
+  <button v-bind="attrs" :class="cn($attrs.class ?? '')" :text="props.text" @click="$emit('action')">
+    <slot>{{ props.text }}</slot>
   </button>
 </template>
 
 <script setup lang="ts">
-defineProps({
-  text: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String as () => "button" | "submit" | "reset",
-    default: "button",
-  },
-  className: {
-    type: String,
-    required: false,
-  },
-});
+import { useAttrs } from "vue";
+import { cn } from "@/lib/utils";
+const attrs = useAttrs();
+const props = defineProps<{
+  text?: string;
+}>();
 defineEmits(["action"]);
 </script>
 
