@@ -15,9 +15,24 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from "@/components/ui/toast";
 import CsrfHandler from "@components/CsrfHandler.vue";
 import Layout from "@components/Layout.vue";
 import LoginForm from "@components/LoginForm.vue";
+import { onMounted } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const { toast } = useToast();
+
+onMounted(() => {
+  if (route.query.loggedOut === "true") {
+    toast({
+      title: "Déconnexion réussie",
+      description: "Vous avez été déconnecté avec succès.",
+    });
+  }
+});
 </script>
 
 <style scoped></style>

@@ -9,9 +9,10 @@
       >BACK-OFFICE</RouterLink
     >
     <Button
-      className="w-32 mt-1 mr-1 bg-gray-900 cursor-pointer text-white py-2 px-4 rounded-lg hover:bg-gray-700 text-2xl focus:outline-hidden focus:ring-3 focus:ring-indigo-200 self-center"
+      class="w-32 mt-1 mr-1 bg-gray-900 cursor-pointer text-white py-2 px-4 rounded-lg hover:bg-gray-700 text-2xl focus:outline-hidden focus:ring-3 focus:ring-indigo-200 self-center"
       @click="logout"
       text="Log out"
+      type="button"
     />
   </div>
 </template>

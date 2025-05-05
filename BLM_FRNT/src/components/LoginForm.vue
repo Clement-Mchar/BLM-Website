@@ -32,21 +32,19 @@
   <div class="flex flex-row justify-between">
     <div></div>
     <Button
-      className=" text-center w-60 mt-1 h-26 text-5xl bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-hidden focus:ring-3 focus:ring-indigo-200"
+      class=" text-center w-60 mt-1 h-26 text-5xl bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-hidden focus:ring-3 focus:ring-indigo-200"
       @click="handleSubmit"
       text="Go"
+      type="submit"
     />
     <div></div>
   </div>
 </form>
-<div v-if="errorMessage" class="text-red-500">
-  {{ errorMessage }}
-</div>
 </template>
 
 <script setup lang="ts">
 import useLogin from "@/services/composables/useLogin";
 import Button from "@components/Button.vue";
 
-const { form, errorMessage, handleSubmit } = useLogin();
+const { form, handleSubmit } = useLogin();
 </script>
