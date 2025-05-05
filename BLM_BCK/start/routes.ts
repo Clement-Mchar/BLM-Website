@@ -20,5 +20,6 @@ router.post('/login', [AuthController, 'login']).use(throttle);
 router.get('/auth/csrf-token', async () => {});
 router.get('/auth/me', [AuthController, 'getCurrentUser']);
 router.post('logout', [AuthController, 'logout']);
+router.post('users/delete-many', [UserController, 'destroyMany']);
 router.resource('users', UserController).use('*', middleware.auth()) ;})
 .prefix('api')
