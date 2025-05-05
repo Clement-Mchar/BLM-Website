@@ -2,13 +2,15 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { blmApi } from "@/services/api";
 import { useQueryClient } from "@tanstack/vue-query";
+import { useToast } from "@/components/ui/toast";
+import { ToastAction } from "@/components/ui/toast";
+import { h } from "vue";
 
 export default function useLogin() {
   const form = ref<{ username: string; password: string }>({
     username: "",
     password: "",
   });
-  const errorMessage = ref<string>("");
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -19,9 +21,25 @@ export default function useLogin() {
       queryClient.setQueryData(["auth"], user);
       router.push("/back-office");
     } catch (error) {
-      errorMessage.value = "Identifiants incorrects";
+      if (error instanceof Error) {
+        const { toast } = useToast();
+        toast({
+          title: "Erreur au moment du login",
+          description: `Database error (${error.name})`,
+          variant: "destructive",
+          action: h(
+            ToastAction,
+            {
+              altText: `Database error (${error.name})`,
+            },
+            {
+              default: () => "Try again",
+            },
+          ),
+        });
+      }
     }
   }
 
-  return { form, errorMessage, handleSubmit };
+  return { form, handleSubmit };
 }
