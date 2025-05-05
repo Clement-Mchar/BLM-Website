@@ -11,18 +11,25 @@ export class UserService {
 
   async store(data: { username: string; password: string; role: string }) {
     const user = new User()
-    user.username = data.username
-    user.password = data.password
-    user.userRole = data.role as UserRole
-    user.isAdmin = data.role === UserRole.Admin
+    await user
+      .merge({
+        username: data.username,
+        password: data.password,
+        userRole: data.role as UserRole,
+        isAdmin: data.role === UserRole.Admin,
+      })
+      .save()
 
-    await user.save()
     return user
   }
   async destroy(id: number) {
     const user = await User.findOrFail(id)
     await user.delete()
     return
+  }
+
+  async destroyMany(ids: number[]) {
+    return await User.query().whereIn('id', ids).delete()
   }
 
   async edit(id: number) {
@@ -32,13 +39,12 @@ export class UserService {
 
   async update(id: number, data: { username?: string; password?: string; role?: string }) {
     const user = await User.findOrFail(id)
-    if (data.username) user.username = data.username
-    if (data.password) user.password = data.password
+
     if (data.role) {
       user.userRole = data.role as UserRole
       user.isAdmin = data.role === UserRole.Admin
     }
-    await user.save()
+    await user.merge(data).save()
     return user
   }
 }
