@@ -1,12 +1,11 @@
-<script setup lang="ts" generic="TData extends { id: number }, TValue">
-import type { ColumnDef, SortingState } from "@tanstack/vue-table";
+<script setup lang="ts" generic="TData extends { id: number | string }, TValue">
+import type { ColumnDef, SortingState, VisibilityState, } from "@tanstack/vue-table";
 import { useVueTable, getCoreRowModel, FlexRender, getSortedRowModel, getFilteredRowModel, getPaginationRowModel } from "@tanstack/vue-table";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 import Button from "~/components/Button.vue";
 import { valueUpdater } from "@/lib/utils";
 import { h, ref } from "vue";
 import { Trash2 } from "lucide-vue-next";
-import { useDeleteUsers } from "@/services/queries/useUsers";
 import ConfirmDialog from "./ConfirmDialog.vue";
 import { useToast } from "./ui/toast";
 import ToastAction from "./ui/toast/ToastAction.vue";
@@ -14,11 +13,13 @@ import { Input } from "@/components/ui/input";
 const props = defineProps<{
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  onDeleteSelected?: (ids: (string | number)[]) => void;
 }>();
 
 const sorting = ref<SortingState>([]);
 const rowSelection = ref({});
 const globalFilter = ref("");
+const columnVisibility = ref<VisibilityState>({})
 const table = useVueTable({
   get data() {
     return props.data;
@@ -31,6 +32,7 @@ const table = useVueTable({
   getPaginationRowModel: getPaginationRowModel(),
   onRowSelectionChange: (updaterOrValue) => valueUpdater(updaterOrValue, rowSelection),
   getFilteredRowModel: getFilteredRowModel(),
+  onColumnVisibilityChange: updaterOrValue => valueUpdater(updaterOrValue, columnVisibility),
   initialState: {
     pagination: {
       pageIndex: 0,
@@ -49,19 +51,22 @@ const table = useVueTable({
     get rowSelection() {
       return rowSelection.value;
     },
+    get columnVisibility() { return columnVisibility.value },
   },
   onGlobalFilterChange: (updaterOrValue) => {
     globalFilter.value = typeof updaterOrValue === "function" ? updaterOrValue(globalFilter.value) : updaterOrValue;
   },
 });
-const { mutate: deleteUsers } = useDeleteUsers();
 
 const handleDeleteSelected = () => {
   const { toast } = useToast();
   const selectedIds = table.getFilteredSelectedRowModel().rows.map((row) => row.original.id);
-  deleteUsers(selectedIds);
+
+  if (!props.onDeleteSelected) return;
+
+  props.onDeleteSelected(selectedIds);
   toast({
-    title: "User deleted",
+    title: "Items deleted",
     description: `Successfully deleted`,
     action: h(
       ToastAction,
@@ -73,6 +78,7 @@ const handleDeleteSelected = () => {
       },
     ),
   });
+  table.resetRowSelection()
 };
 </script>
 <template>

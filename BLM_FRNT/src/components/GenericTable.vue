@@ -7,6 +7,7 @@ import { computed } from "vue";
 const props = defineProps<{
   useQueryFn: () => UseQueryReturnType<TData, Error>;
   columns: ColumnDef<TData, TValue>[];
+  onDeleteSelected?: (ids: (string | number)[]) => void;
 }>();
 
 const queryResult = computed(() => props.useQueryFn());
@@ -19,6 +20,6 @@ const data = computed(() => fetchedData.value ?? []);
   <div class="container py-10 mx-auto flex justify-center">
     <div v-if="isLoading" class="text-center">Loading...</div>
     <div v-if="isError" class="text-center text-red-500">Error: {{ error?.message }}</div>
-    <DataTable :columns="columns" :data="data" />
+    <DataTable :columns="columns" :data="data" :onDeleteSelected="onDeleteSelected" />
   </div>
 </template>
