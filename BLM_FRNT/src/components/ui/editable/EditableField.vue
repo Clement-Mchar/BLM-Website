@@ -15,8 +15,8 @@ import type { ZodSchema } from "zod";
 
 const props = defineProps<{
   fieldName: string;
-  defaultValue: string;
-  entityId: number;
+  defaultValue: string | undefined;
+  entityId: number | string;
   type?: "select" | "text";
   options?: Record<string, string>;
   schema: ZodSchema;
@@ -27,7 +27,6 @@ const validateFn = props.schema ? toTypedSchema(props.schema) : undefined;
 
 const {
   value: inputValue,
-  errorMessage,
   validate,
 } = useField(props.fieldName, validateFn, {
   initialValue: props.defaultValue,
