@@ -18,12 +18,14 @@ const driveConfig = defineConfig({
     }),
     r2: services.s3({
       credentials: {
-        accessKeyId: env.get('R2_KEY'),
-        secretAccessKey: env.get('R2_SECRET'),
+        accessKeyId: env.get('R2_KEY') as string,
+        secretAccessKey: env.get('R2_SECRET') as string,
       },
       region: 'auto',
-      bucket: env.get('R2_BUCKET'),
+      bucket: env.get('R2_BUCKET') as string,
       endpoint: env.get('R2_ENDPOINT'),
+      cdnUrl: env.get('R2_CDN') as string,
+      supportsACL: false,
       visibility: 'public',
     }),
   },
@@ -32,5 +34,7 @@ const driveConfig = defineConfig({
 export default driveConfig
 
 declare module '@adonisjs/drive/types' {
-  export interface DriveDisks extends InferDriveDisks<typeof driveConfig> {}
+  export interface DriveDisks extends InferDriveDisks<typeof driveConfig> {
+
+  }
 }
