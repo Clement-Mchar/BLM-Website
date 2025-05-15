@@ -1,6 +1,8 @@
 import User from '#models/user'
 import { UserRole } from '../enums.js'
 import { inject } from '@adonisjs/core'
+import { CreateUserData } from '../interfaces/user_interface.js'
+import { UpdateUserData } from '../interfaces/user_interface.js'
 
 @inject()
 export class UserService {
@@ -9,7 +11,7 @@ export class UserService {
     return users
   }
 
-  async store(data: { username: string; password: string; role: string }) {
+  async store(data: CreateUserData) {
     const user = new User()
     await user
       .merge({
@@ -37,7 +39,7 @@ export class UserService {
     return user
   }
 
-  async update(id: number, data: { username?: string; password?: string; role?: string }) {
+  async update(id: number, data: UpdateUserData ) {
     const user = await User.findOrFail(id)
 
     if (data.role) {
