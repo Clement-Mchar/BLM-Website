@@ -17,8 +17,8 @@ export class UserService {
       .merge({
         username: data.username,
         password: data.password,
-        userRole: data.role as UserRole,
-        isAdmin: data.role === UserRole.Admin,
+        userRole: data.userRole as UserRole,
+        isAdmin: data.userRole === UserRole.Admin,
       })
       .save()
 
@@ -42,9 +42,9 @@ export class UserService {
   async update(id: number, data: UpdateUserData ) {
     const user = await User.findOrFail(id)
 
-    if (data.role) {
-      user.userRole = data.role as UserRole
-      user.isAdmin = data.role === UserRole.Admin
+    if (data.userRole) {
+      user.userRole = data.userRole as UserRole
+      user.isAdmin = data.userRole === UserRole.Admin
     }
     await user.merge(data).save()
     return user
