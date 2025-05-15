@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/vue-query";
 import { blmApi } from "@/services/api";
 
-export function useUsers() {
+export function useAlbums() {
     return useQuery({
         queryKey: ["albums"],
         queryFn: async() => {
