@@ -2,6 +2,7 @@ import ky, { HTTPError } from "ky";
 import type { KyInstance } from "ky";
 import type { ConfirmUserPayload, User } from "@/interfaces/User";
 import type { Album } from "@/interfaces/Album";
+import type { Artist, CreateArtist } from "@/interfaces/Artist";
 
 class BlmApi {
   #client: KyInstance;
@@ -86,10 +87,47 @@ class BlmApi {
     return await this.#client.get("users").json();
   }
 
-  getArtists() {
-    return this.#client.get("artists").json();
+  async getArtists(): Promise<Artist[]> {
+    return await this.#client.get("artists").json();
   }
 
+  createArtist(payload: CreateArtist): Promise<Artist | null> {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(payload)) {
+      if (value == null) continue;
+
+      formData.append(key, value instanceof File ? value : String(value));
+    }
+    return this.#client
+      .post("artists", {
+        body: formData,
+      })
+      .json();
+  }
+
+  deleteArtist(id: string): Promise<Artist | null> {
+    return this.#client.delete(`artists/${id}`).json();
+  }
+  deleteArtists(ids: string[]): Promise<void> {
+    return this.#client
+      .post("artists/delete-many", {
+        json: { ids },
+      })
+      .json();
+  }
+  getArtistEdit(id: string): Promise<Artist | null> {
+    return this.#client.get(`artists/${id}/edit`).json();
+  }
+  editArtist(id: string, payload: Partial<Artist>): Promise<Artist> {
+    return this.#client.patch(`users/${id}`, { json: payload }).json();
+  }
+  editArtistAvatar(id: string, payload: FormData): Promise<Artist> {
+    return this.#client
+      .patch(`artists/${id}/`, {
+        body: payload,
+      })
+      .json();
+  }
   getTracks() {
     return this.#client.get("tracks").json();
   }

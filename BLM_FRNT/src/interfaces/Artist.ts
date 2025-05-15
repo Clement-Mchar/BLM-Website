@@ -1,9 +1,22 @@
-export interface Artist {
-  id: string;
-  name: string;
-  bio: string;
-  coverUrl: string | null;
-  spotifyLink: string | null;
-  createdAt: string;
-  updatedAt: string;
+export interface Artist  {
+    id: string
+    name: string
+    spotify?: string
+    bio?: string
+    genre?: string
+    twitter?: string
+    avatar?: File
+    insta?: string
+    role?: string
+}
+
+export interface CreateArtist {
+    name: string
+    spotify?: string
+    bio?: string
+    genre?: string
+    twitter?: string
+    avatar?: File
+    insta?: string
+    role?: string
 }
