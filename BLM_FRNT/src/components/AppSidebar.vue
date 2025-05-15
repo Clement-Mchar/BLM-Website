@@ -58,11 +58,11 @@ const data = {
       items: [
         {
           title: "All Artists",
-          url: "#",
+          url: "/back-office/artists",
         },
         {
           title: "Create Artist",
-          url: "#",
+          url: "/back-office/artists/create",
         },
       ],
     },
