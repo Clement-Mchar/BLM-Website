@@ -2,7 +2,7 @@ import { h } from "vue";
 import type { User } from "@/interfaces/User";
 import type { ColumnDef } from "@tanstack/vue-table";
 import { ArrowUpDown } from "lucide-vue-next";
-import DropdownAction from "@/components/DataTableDropDown.vue";
+import DropdownAction from "@/components/users/UserDropDown.vue";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "../ui/checkbox";
 export const columns: ColumnDef<User>[] = [
@@ -46,10 +46,6 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "userRole",
     header: () => h("span", "Role"),
-  },
-  {
-    accessorKey: "isAdmin",
-    header: () => h("span", "Admin"),
   },
   {
     accessorKey: "createdAt",
