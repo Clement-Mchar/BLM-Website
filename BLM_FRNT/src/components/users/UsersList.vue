@@ -2,6 +2,7 @@
   <GenericTable
     :useQueryFn="useUsers"
     :columns="userColumns"
+    :onDeleteSelected="handleDeleteSelected"
   />
 </template>
 
@@ -9,6 +10,13 @@
 import { useUsers } from "@/services/queries/useUsers";
 import GenericTable from "@components/GenericTable.vue";
 import { columns as userColumns } from "@/components/users/columns";
+import { useDeleteUsers } from "@/services/queries/useUsers";
+const { mutate: deleteUsers } = useDeleteUsers();
+const handleDeleteSelected = (ids: number[]) => {
+  console.log("Attempting to delete artists with IDs: ", ids);
+  
+  deleteUsers(ids);
+}
 </script>
 
 <style scoped></style>
