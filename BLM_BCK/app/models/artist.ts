@@ -1,21 +1,24 @@
-
 import { WithTime } from '../mixins/with_time.js'
 import Event from '#models/event'
 import Album from '#models/album'
-import { randomUUID } from 'node:crypto'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
-import { BaseModel, column, beforeCreate, manyToMany } from '@adonisjs/lucid/orm'
-import { attachment } from '@jrmc/adonis-attachment'
+import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
+import { attachment, Attachmentable } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import Track from './track.js'
 import { compose } from '@adonisjs/core/helpers'
-export default class Artist extends compose(BaseModel, WithTime) {
-  static selfAssignPrimaryKey = true
-
+import { WithUuid } from '../mixins/with_uuid.js'
+import Post from './post.js'
+export default class Artist extends compose(BaseModel, Attachmentable, WithTime, WithUuid) {
   @manyToMany(() => Event, {
     pivotTable: 'artists_events',
   })
   declare events: ManyToMany<typeof Event>
+
+  @manyToMany(() => Post, {
+    pivotTable: 'artists_posts',
+  })
+  declare posts: ManyToMany<typeof Post>
 
   @manyToMany(() => Album, {
     pivotTable: 'artists_albums',
@@ -26,14 +29,6 @@ export default class Artist extends compose(BaseModel, WithTime) {
     pivotTable: 'artists_tracks',
   })
   declare tracks: ManyToMany<typeof Track>
-
-  @column({ isPrimary: true })
-  declare id: string
-
-  @beforeCreate()
-  static assignUuid(artist: Artist) {
-    artist.id = randomUUID()
-  }
 
   @column()
   declare name: string
@@ -57,6 +52,5 @@ export default class Artist extends compose(BaseModel, WithTime) {
   declare role: string | null
 
   @column()
-  declare videosUrls: string[] | null
-
+  declare spotify: string | null
 }

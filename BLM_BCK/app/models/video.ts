@@ -1,26 +1,24 @@
 import { WithTime } from '../mixins/with_time.js'
-import Album from '#models/album'
 import Artist from '#models/artist'
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 import { compose } from '@adonisjs/core/helpers'
 import { WithUuid } from '../mixins/with_uuid.js'
+import { VideoCategory } from '../enums.js'
 
-export default class Track extends compose(BaseModel, WithTime, WithUuid) {
-  @manyToMany(() => Album, {
-    pivotTable: 'albums_tracks',
-  })
-  declare albums: ManyToMany<typeof Album>
+export default class Video extends compose(BaseModel, WithTime, WithUuid) {
 
   @manyToMany(() => Artist, {
-    pivotTable: 'artists_tracks',
+    pivotTable: 'artists_videos',
   })
   declare artists: ManyToMany<typeof Artist>
-  
-  @column()
-  declare name: string
 
   @column()
-  declare spotify: string
+  declare title: string
 
+  @column()
+  declare url: string
+
+  @column()
+  declare category: VideoCategory
 }
