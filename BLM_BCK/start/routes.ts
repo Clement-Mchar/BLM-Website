@@ -12,6 +12,7 @@ import { throttle } from '#start/limiter'
 import { middleware } from '#start/kernel'
 
 const UserController = () => import('#controllers/user_controller')
+const ArtistController = () => import('#controllers/artist_controller')
 const AuthController = () => import('#controllers/auth_controller')
 
 router.on('/').render('pages/home')
@@ -21,5 +22,8 @@ router.get('/auth/csrf-token', async () => {});
 router.get('/auth/me', [AuthController, 'getCurrentUser']);
 router.post('logout', [AuthController, 'logout']);
 router.post('users/delete-many', [UserController, 'destroyMany']);
-router.resource('users', UserController).use('*', middleware.auth()) ;})
+router.resource('users', UserController).use('*', middleware.auth());
+router.post('artists/delete-many', [ArtistController, 'destroyMany']);
+router.resource('artists', ArtistController).use('*', middleware.auth());
+})
 .prefix('api')
