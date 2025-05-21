@@ -1,9 +1,5 @@
 <template>
-  <GenericTable
-    :useQueryFn="useUsers"
-    :columns="userColumns"
-    :onDeleteSelected="handleDeleteSelected"
-  />
+  <GenericTable :useQueryFn="useUsers" :columns="userColumns" :onDeleteSelected="handleDeleteSelected" />
 </template>
 
 <script setup lang="ts">
@@ -13,10 +9,8 @@ import { columns as userColumns } from "@/components/users/columns";
 import { useDeleteUsers } from "@/services/queries/useUsers";
 const { mutate: deleteUsers } = useDeleteUsers();
 const handleDeleteSelected = (ids: number[]) => {
-  console.log("Attempting to delete artists with IDs: ", ids);
-  
   deleteUsers(ids);
-}
+};
 </script>
 
 <style scoped></style>
