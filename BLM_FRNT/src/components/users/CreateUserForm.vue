@@ -28,7 +28,7 @@ const formSchema = toTypedSchema(
           });
         }
       }),
-    role: z.nativeEnum(UserRole),
+    userRole: z.nativeEnum(UserRole),
   }),
 );
 
