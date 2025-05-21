@@ -13,11 +13,11 @@ export interface CreateUserPayload {
     password: string; 
     confirmPassword: string 
   };
-  role: string 
+  userRole: string 
 }
 export interface ConfirmUserPayload {
   username: string; 
   password: string;
   password_confirmation: string;
-  role: string 
+  userRole: string 
 }
