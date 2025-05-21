@@ -5,6 +5,7 @@ import EditUser from "@components/users/EditUser.vue"
 import CreateArtistForm from "@/components/artists/CreateArtistForm.vue";
 import ArtistsList from "@/components/artists/ArtistsList.vue";
 import EditArtist from "@/components/artists/EditArtist.vue";
+import UserDetails from "@/components/users/UserDetails.vue";
 
 export default [
   {
@@ -27,6 +28,11 @@ export default [
         path: "users/:id/edit",
         name: "edit-user",
         component: EditUser,
+      },
+      {
+        path: "users/:id",
+        name: "user-details",
+        component: UserDetails,
       },
       {
         path: "artists",
