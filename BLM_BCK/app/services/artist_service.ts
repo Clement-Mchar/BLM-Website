@@ -21,7 +21,13 @@ export class ArtistService {
   }
 
   async destroyMany(ids: string[]) {
-    return await Artist.query().whereIn('id', ids).delete()
+    const artists = await Artist.findMany(ids)
+
+    for (const artist of artists) {
+      await artist.delete()
+    }
+
+    return
   }
 
   async edit(id: number) {
