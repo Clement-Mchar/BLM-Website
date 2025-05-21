@@ -31,13 +31,13 @@ export function useCreateUser() {
   return useMutation({
     mutationKey: userKeys.create(),
     mutationFn: async (payload: CreateUserPayload) => {
-      const { username, passwordConfirmation, role } = payload;
+      const { username, passwordConfirmation, userRole } = payload;
 
       const userData: ConfirmUserPayload = {
         username,
         password: passwordConfirmation.password,
         password_confirmation: passwordConfirmation.password,
-        role,
+        userRole,
       };
 
       const user = await blmApi.createUser(userData);
@@ -104,11 +104,22 @@ export function useDeleteUsers() {
     },
   });
 }
-export function useUser(id: number) {
+export function useUserToEdit(id: number) {
   return useQuery({
     queryKey: computed(() => userKeys.detail(id)),
     queryFn: async () => {
       const user = await blmApi.getUserEdit(id);
+      return user;
+    },
+    retry: false,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+export function useUser(id: number) {
+  return useQuery({
+    queryKey: computed(() => userKeys.detail(id)),
+    queryFn: async () => {
+      const user = await blmApi.getUser(id);
       return user;
     },
     retry: false,

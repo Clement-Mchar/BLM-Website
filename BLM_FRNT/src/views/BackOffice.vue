@@ -3,7 +3,7 @@
     <CsrfHandler />
     <Navbar />
     <div
-      class="flex flex-row items-center h-screen relative overflow-hidden"
+      class="flex flex-row h-full relative overflow-hidden"
     >
       <SidebarProvider>
         <AppSidebar class="text-white" />
