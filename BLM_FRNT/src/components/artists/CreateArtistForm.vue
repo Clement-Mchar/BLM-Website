@@ -7,13 +7,18 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { useRouter } from "vue-router";
 import { useCreateArtist } from "@/services/queries/useArtists";
+import { computed } from "vue";
 import TipTap from "../TipTap.vue";
 const MAX_FILE_SIZE = 20000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/avif", "image/png", "image/webp"];
 const formSchema = toTypedSchema(
   z.object({
     name: z.string().min(2).max(50),
-    bio: z.string().max(5000).optional().transform((val) => val?.replace(/<[^>]+>/g, '').trim()),
+    bio: z
+      .string()
+      .max(5000)
+      .optional()
+      .transform((val) => val?.replace(/<[^>]+>/g, "").trim()),
     genre: z.string().optional(),
     twitter: z.string().url().optional(),
     spotify: z.string().url().optional(),
@@ -37,9 +42,17 @@ const router = useRouter();
 const onSubmit = form.handleSubmit((values) => {
   createArtist.mutate(values, {
     onSuccess: () => {
-      router.push(({name: "artists"}));
+      router.push({ name: "artists" });
     },
   });
+});
+
+const avatarUrl = computed(() => {
+  const maybeFile = form.values.avatar;
+  if (maybeFile instanceof File) {
+    return URL.createObjectURL(maybeFile);
+  }
+  return null;
 });
 </script>
 
@@ -58,8 +71,8 @@ const onSubmit = form.handleSubmit((values) => {
       <FormField v-slot="{ componentField }" name="bio">
         <FormItem>
           <FormLabel>Bio</FormLabel>
-          <FormControl>
-            <TipTap v-bind="componentField" class="border rounded-sm border-gray-200"/>
+          <FormControl class="min-w-fit w-96 h-56">
+            <TipTap v-bind="componentField" class="border rounded-sm border-gray-200 w-full h-56" focus="none" />
           </FormControl>
           <FormMessage />
         </FormItem>
@@ -94,6 +107,9 @@ const onSubmit = form.handleSubmit((values) => {
       <FormField v-slot="{ handleChange, handleBlur }" name="avatar">
         <FormItem>
           <FormLabel>Avatar</FormLabel>
+          <div class="flex place-content-center" v-if="avatarUrl">
+            <img :src="avatarUrl" alt="Avatar" class="w-32 h-32 rounded-full" />
+          </div>
           <FormControl>
             <Input id="picture" type="file" @change="handleChange" @blur="handleBlur" />
           </FormControl>
@@ -122,3 +138,19 @@ const onSubmit = form.handleSubmit((values) => {
     </form>
   </div>
 </template>
+<style>
+.ProseMirror-focused {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.ProseMirror {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+</style>
