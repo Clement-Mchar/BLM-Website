@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 import {
   EditableArea,
   EditableCancelTrigger,
@@ -41,32 +41,9 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div v-if="props.type === 'select' && props.options">
-    <div class="mt-1 mb-1 place-self-center">{{ fieldName }}</div>
-    <Select v-model="inputValue" @update:model-value="handleSubmit">
-      <SelectTrigger class="bg-gray-800">
-        <SelectValue placeholder="Select a user role" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectItem v-for="(value, key) in props.options" :key="key" :value="value">
-            {{ key }}
-          </SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  </div>
-  <EditableRoot
-    class="flex flex-col w-96"
-    v-else
-    :defaultValue="props.defaultValue"
-    :modelValue="inputValue"
-    @update:model-value="(val) => (inputValue = val)"
-    auto-resize
-    v-slot="{ isEditing }"
-    submit-mode="none"
-    @submit="handleSubmit"
-  >
+  <EditableRoot class="flex flex-col w-96" :defaultValue="props.defaultValue" :modelValue="inputValue"
+    @update:model-value="(val) => (inputValue = val)" auto-resize v-slot="{ isEditing }" submit-mode="none"
+    @submit="handleSubmit">
     <div class="mt-1 mb-1 place-self-center">{{ fieldName }}</div>
 
     <div class="flex flex-row border-gray-300 border-solid border-[1px] rounded-md w-full justify-start h-[37px] mb-3">
