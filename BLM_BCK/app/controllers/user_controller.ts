@@ -28,6 +28,10 @@ export default class UserController {
     const id = params.id
     return this.userService.edit(id)
   }
+  async show({ params }: HttpContext) {
+    const id = params.id
+    return this.userService.show(id)
+  }
 
   async update({ request, params }: HttpContext) {
     const id = params.id

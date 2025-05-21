@@ -38,6 +38,10 @@ export class UserService {
     const user = await User.findOrFail(id)
     return user
   }
+  async show(id: number) {
+    const user = await User.findOrFail(id)
+    return user
+  }
 
   async update(id: number, data: UpdateUserData ) {
     const user = await User.findOrFail(id)
