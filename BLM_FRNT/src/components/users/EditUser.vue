@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EditableField from "../ui/editable/EditableField.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUpdateUser, useUser } from "@/services/queries/useUsers";
+import { useUpdateUser, useUserToEdit } from "@/services/queries/useUsers";
 import { z } from "zod";
 import { UserRole } from "../../../../BLM_BCK/app/enums";
 import { useToast } from "../ui/toast";
@@ -11,45 +11,54 @@ import { validateWithZod } from "@/lib/utils";
 
 const route = useRoute();
 const router = useRouter();
-
+import { ref, watch } from "vue";
+import Select from "../ui/select/Select.vue";
+import SelectTrigger from "../ui/select/SelectTrigger.vue";
+import SelectValue from "../ui/select/SelectValue.vue";
+import SelectContent from "../ui/select/SelectContent.vue";
+import SelectGroup from "../ui/select/SelectGroup.vue";
+import SelectItem from "../ui/select/SelectItem.vue";
 const userId = Number(route.params.id);
 
-const { data: user, isLoading } = useUser(userId);
+const { data: user, isLoading } = useUserToEdit(userId);
 const updateUser = useUpdateUser(userId);
 
 const username = z.string().min(3, { message: "Must be 3 or more characters long" }).max(20);
-const role = z.nativeEnum(UserRole);
+const userRole = z.nativeEnum(UserRole);
 
-const handleSave = (fieldName: string, value: string) => {
-  const key = fieldName?.toLowerCase();
+const selectedRole = ref<string>(user.value?.userRole.toString() ?? "");
+
+watch(user, () => {
+  selectedRole.value = user.value?.userRole.toString() ?? "";
+});
+const handleSave = (fieldName: string, value: string | number) => {
+  const key = fieldName?.toLowerCase() as keyof typeof user.value;
   let validationResult;
   const { toast } = useToast();
+  const schemaMap = {
+    username: username,
+    userRole: userRole,
+  };
+  const schema = schemaMap[key];
 
-  if (fieldName === "Username") {
-    validationResult = validateWithZod(username, value);
-  } else if (fieldName === "Role") {
-    validationResult = validateWithZod(role, value);
+  if (schema) {
+    validationResult = validateWithZod(schema, value);
   }
-
   if (!validationResult?.isValid) {
     toast({
       title: "Update error",
       description: `(${validationResult?.errorMessage})`,
       variant: "destructive",
       duration: 5000,
-      action: h(
-        ToastAction,
-        {
-          altText: `(${validationResult?.errorMessage})`,
-        },
-        {
-          default: () => "Try again",
-        },
-      ),
+      action: h(ToastAction, { altText: `(${validationResult?.errorMessage})` }, { default: () => "Try again" }),
     });
     return;
   }
-  if (!user.value) return;
+  if (!user.value) {
+    console.log("User data undefined");
+    return;
+  }
+
   updateUser.mutate(
     {
       id: user!.value.id,
@@ -59,7 +68,11 @@ const handleSave = (fieldName: string, value: string) => {
     },
     {
       onSuccess: () => {
+        console.log("User updated successfully");
         router.push("/back-office/users");
+      },
+      onError: (error) => {
+        console.error("Update failed", error);
       },
     },
   );
@@ -69,16 +82,29 @@ const handleSave = (fieldName: string, value: string) => {
 <template>
   <div v-if="isLoading">Loading...</div>
   <div v-else-if="user" class="mt-4">
-    <EditableField fieldName="Username" :schema="username" :default-value="user!.username" :entity-id="user!.id" @save="handleSave" />
-    <EditableField
-      fieldName="Role"
-      :schema="role"
-      :default-value="user!.userRole"
-      type="select"
-      :options="UserRole"
-      :entity-id="user!.id"
-      @save="handleSave"
-    />
+    <EditableField fieldName="username" :schema="username" :default-value="user!.username" :entity-id="user!.id" @save="handleSave" />
+    <Select
+      v-model="selectedRole"
+      @update:modelValue="
+        (val) => {
+          if (typeof val === 'string') handleSave('userRole', val);
+        }
+      "
+    >
+      <SelectTrigger>
+        <SelectValue placeholder="Select a user role" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectItem :value="UserRole.Admin.toString()">
+            {{ UserRole.Admin }}
+          </SelectItem>
+          <SelectItem :value="UserRole.Webmaster.toString()">
+            {{ UserRole.Webmaster }}
+          </SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   </div>
 </template>
 <style scoped></style>
