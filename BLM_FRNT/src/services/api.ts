@@ -74,7 +74,9 @@ class BlmApi {
   getUserEdit(id: number): Promise<User | null> {
     return this.#client.get(`users/${id}/edit`).json();
   }
-
+  getUser(id: number): Promise<User | null> {
+    return this.#client.get(`users/${id}`).json()
+  }
   editUser(id: number, payload: Partial<User>): Promise<User> {
     return this.#client.patch(`users/${id}`, { json: payload }).json();
   }
@@ -119,7 +121,7 @@ class BlmApi {
     return this.#client.get(`artists/${id}/edit`).json();
   }
   editArtist(id: string, payload: Partial<Artist>): Promise<Artist> {
-    return this.#client.patch(`users/${id}`, { json: payload }).json();
+    return this.#client.patch(`artists/${id}`, { json: payload }).json();
   }
   editArtistAvatar(id: string, payload: FormData): Promise<Artist> {
     return this.#client
