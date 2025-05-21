@@ -8,7 +8,6 @@ import ToastAction from "../ui/toast/ToastAction.vue";
 import { h } from "vue";
 import { validateWithZod } from "@/lib/utils";
 import Input from "../ui/input/Input.vue";
-import { useField, type Field } from "vee-validate";
 const route = useRoute();
 const router = useRouter();
 
@@ -31,21 +30,29 @@ const bio = z
   .optional()
   .transform((val) => val?.replace(/<[^>]+>/g, "").trim());
 const genre = z.string().optional();
-const spotify= z.string().url().optional();
+const spotify = z.string().url().optional();
 const twitter = z.string().url().optional();
 
 const insta = z.string().url().optional();
 const role = z.string().optional();
 const { toast } = useToast();
 const handleSave = (fieldName: string, value: string) => {
-  const key = fieldName?.toLowerCase();
+  const key = fieldName?.toLowerCase() as keyof typeof artist.value;
   let validationResult;
+  const schemaMap = {
+    name: name,
+    role: role,
+    genre: genre,
+    bio: bio,
+    twitter: twitter,
+    insta: insta,
+    spotify: spotify,
+  };
 
+  const schema = schemaMap[key];
 
-  if (fieldName === "Name") {
-    validationResult = validateWithZod(name, value);
-  } else if (fieldName === "Role") {
-    validationResult = validateWithZod(role, value);
+  if (schema) {
+    validationResult = validateWithZod(schema, value);
   }
 
   if (!validationResult?.isValid) {
@@ -78,6 +85,9 @@ const handleSave = (fieldName: string, value: string) => {
       onSuccess: () => {
         router.push("/back-office/artists");
       },
+      onError: (error) => {
+        console.error("Update failed", error);
+      },
     },
   );
 };
@@ -98,10 +108,9 @@ const handleChange = async (e: Event) => {
     });
     return;
   }
-    const formData = new FormData();
+  const formData = new FormData();
   formData.append("avatar", file);
 
-  // Envoi via mutation
   updateAvatar(
     { id: artistId, payload: formData },
     {
@@ -115,11 +124,9 @@ const handleChange = async (e: Event) => {
           variant: "destructive",
         });
       },
-    }
+    },
   );
-}
-
-
+};
 </script>
 
 <template>
@@ -131,6 +138,7 @@ const handleChange = async (e: Event) => {
     <EditableField fieldName="Twitter" :schema="twitter" :default-value="artist!.twitter" :entity-id="artist!.id" @save="handleSave" />
     <EditableField fieldName="Insta" :schema="insta" :default-value="artist!.insta" :entity-id="artist!.id" @save="handleSave" />
     <EditableField fieldName="Spotify" :schema="spotify" :default-value="artist!.spotify" :entity-id="artist!.id" @save="handleSave" />
+    <div class="mt-1 mb-1 place-self-center">Avatar</div>
     <Input id="picture" type="file" @change="handleChange" />
   </div>
 </template>
