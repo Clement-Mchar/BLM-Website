@@ -30,6 +30,6 @@ export default class Album extends compose(BaseModel, Attachmentable, WithUuid, 
   declare cover: Attachment | null
 
   @column()
-  declare spotify: string | null
+  declare link: string | null
 
 }
