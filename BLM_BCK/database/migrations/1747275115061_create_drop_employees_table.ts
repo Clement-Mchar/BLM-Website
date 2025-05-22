@@ -8,6 +8,14 @@ export default class extends BaseSchema {
   }
 
   async down() {
-
+    this.schema.createTable(this.tableName, (table) => {
+      table.json('avatar').nullable()
+      table.uuid('id').primary()
+      table.string('role').nullable()
+      table.string('insta').nullable()
+      table.text('bio').nullable()
+      table.string('name').notNullable()
+      table.timestamps(true)
+    })
   }
 }

@@ -16,5 +16,6 @@ export default class Employee extends BaseSchema {
     }
 
     public async down () {
+        this.schema.dropTable(this.tableName)
     }
 }

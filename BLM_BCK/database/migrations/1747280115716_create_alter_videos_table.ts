@@ -5,10 +5,13 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.enu('category', ["CLIP", "LIVE", "INTERVIEW", "ANOUNCE"]).notNullable()
+      table.enu('category', ['CLIP', 'LIVE', 'INTERVIEW', 'ANOUNCE']).notNullable()
     })
   }
 
   async down() {
+    this.schema.alterTable(this.tableName, (table) => {
+      table.dropColumn('category')
+    })
   }
 }

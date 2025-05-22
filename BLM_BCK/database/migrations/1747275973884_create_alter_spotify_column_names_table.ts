@@ -5,13 +5,13 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.renameColumn('spotify_link', 'spotify')
+      table.renameColumn('spotify_link', 'link')
     })
   }
 
   async down() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.renameColumn('spotify', 'spotify_link')
+      table.renameColumn('link', 'spotify_link')
     })
   }
 }

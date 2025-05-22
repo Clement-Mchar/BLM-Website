@@ -14,5 +14,6 @@ export default class Track extends BaseSchema {
     }
 
     public async down () {
+        this.schema.dropTable(this.tableName)
     }
 }
