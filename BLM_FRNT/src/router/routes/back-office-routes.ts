@@ -1,11 +1,12 @@
-import UsersList from "@/components/users/UsersList.vue"
+import UsersList from "@/components/users/UsersList.vue";
 import BackOffice from "~/views/BackOffice.vue";
 import CreateUserForm from "@components/users/CreateUserForm.vue";
-import EditUser from "@components/users/EditUser.vue"
+import EditUser from "@components/users/EditUser.vue";
 import CreateArtistForm from "@/components/artists/CreateArtistForm.vue";
 import ArtistsList from "@/components/artists/ArtistsList.vue";
 import EditArtist from "@/components/artists/EditArtist.vue";
 import UserDetails from "@/components/users/UserDetails.vue";
+import ArtistDetails from "@/components/artists/ArtistDetails.vue";
 
 export default [
   {
@@ -17,7 +18,7 @@ export default [
         path: "users",
         name: "users",
         component: UsersList,
-        props: true
+        props: true,
       },
       {
         path: "users/create",
@@ -38,17 +39,22 @@ export default [
         path: "artists",
         name: "artists",
         component: ArtistsList,
-        props: true
+        props: true,
       },
       {
         path: "artists/create",
         component: CreateArtistForm,
         props: true,
       },
-            {
+      {
         path: "artists/:id/edit",
         name: "edit-artist",
         component: EditArtist,
+      },
+      {
+        path: "artists/:id",
+        name: "artist-details",
+        component: ArtistDetails,
       },
     ],
     meta: { requiresAuth: true },

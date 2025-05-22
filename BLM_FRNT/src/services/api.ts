@@ -75,7 +75,7 @@ class BlmApi {
     return this.#client.get(`users/${id}/edit`).json();
   }
   getUser(id: number): Promise<User | null> {
-    return this.#client.get(`users/${id}`).json()
+    return this.#client.get(`users/${id}`).json();
   }
   editUser(id: number, payload: Partial<User>): Promise<User> {
     return this.#client.patch(`users/${id}`, { json: payload }).json();
@@ -106,7 +106,9 @@ class BlmApi {
       })
       .json();
   }
-
+  getArtist(id: string): Promise<Artist | null> {
+    return this.#client.get(`artists/${id}`).json();
+  }
   deleteArtist(id: string): Promise<Artist | null> {
     return this.#client.delete(`artists/${id}`).json();
   }
