@@ -35,7 +35,10 @@ export default class ArtistController {
     const id = params.id
     return this.artistService.edit(id)
   }
-
+  async show({ params }: HttpContext) {
+    const id = params.id
+    return this.artistService.show(id)
+  }
   async update({ request, params }: HttpContext) {
     const id = params.id
     const data = await request.validateUsing(updateArtistValidator)

@@ -34,7 +34,10 @@ export class ArtistService {
     const artist = await Artist.findOrFail(id)
     return artist
   }
-
+  async show(id: string) {
+    const user = await Artist.findOrFail(id)
+    return user
+  }
   async update(id: number, data: UpdateArtistData) {
     const artist = await Artist.findOrFail(id)
 
