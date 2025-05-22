@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="flex flex-col min-h-96 items-center">
+    <div class="flex min-h-svh flex-col items-center">
       <div class="flex items-start">
         <h1 class="text-[180px] font-resolve mb-5 text-white max-h-52">
           •BLM•

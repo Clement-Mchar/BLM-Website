@@ -32,7 +32,7 @@ watch(user, () => {
   selectedRole.value = user.value?.userRole.toString() ?? "";
 });
 const handleSave = (fieldName: string, value: string | number) => {
-  const key = fieldName?.toLowerCase() as keyof typeof user.value;
+  const key = fieldName as keyof typeof user.value;
   let validationResult;
   const { toast } = useToast();
   const schemaMap = {

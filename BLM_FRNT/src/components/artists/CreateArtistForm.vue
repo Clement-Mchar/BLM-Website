@@ -17,8 +17,7 @@ const formSchema = toTypedSchema(
     bio: z
       .string()
       .max(5000)
-      .optional()
-      .transform((val) => val?.replace(/<[^>]+>/g, "").trim()),
+      .optional(),
     genre: z.string().optional(),
     twitter: z.string().url().optional(),
     spotify: z.string().url().optional(),
