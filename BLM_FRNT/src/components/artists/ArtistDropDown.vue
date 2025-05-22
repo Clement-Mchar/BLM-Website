@@ -1,5 +1,5 @@
 <template>
-  <DataTableDropDown :onDelete="deleteArtist" :editLink="{ name: 'edit-artist', params: { id: props.artist.id } }" :detailsLink="{}"></DataTableDropDown>
+  <DataTableDropDown :onDelete="deleteArtist" :editLink="{ name: 'edit-artist', params: { id: props.artist.id } }" :detailsLink="{name: 'artist-details', params: { id: props.artist.id }}""></DataTableDropDown>
 </template>
 
 <script setup lang="ts">
