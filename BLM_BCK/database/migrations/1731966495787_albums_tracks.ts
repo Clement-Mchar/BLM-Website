@@ -14,6 +14,5 @@ export default class AlbumTrack extends BaseSchema {
     }
 
     public async down () {
-        this.schema.dropTable(this.tableName)
     }
 }
