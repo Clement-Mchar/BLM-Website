@@ -5,7 +5,6 @@ import { attachment, Attachmentable } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import Artist from './artist.js'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
-import Track from './track.js'
 import { compose } from '@adonisjs/core/helpers'
 import { WithUuid } from '../mixins/with_uuid.js'
 import Post from './post.js'
@@ -20,11 +19,6 @@ export default class Album extends compose(BaseModel, Attachmentable, WithUuid, 
     pivotTable: 'albums_posts',
   })
   declare posts: ManyToMany<typeof Post>
-
-  @manyToMany(() => Track, {
-    pivotTable: 'albums_tracks',
-  })
-  declare tracks: ManyToMany<typeof Track>
 
   @column()
   declare name: string
