@@ -30,15 +30,16 @@ export class ArtistService {
     return
   }
 
-  async edit(id: number) {
+  async edit(id: string) {
     const artist = await Artist.findOrFail(id)
     return artist
   }
+
   async show(id: string) {
-    const user = await Artist.findOrFail(id)
-    return user
+    const artist = await Artist.findOrFail(id)
+    return artist
   }
-  async update(id: number, data: UpdateArtistData) {
+  async update(id: string, data: UpdateArtistData) {
     const artist = await Artist.findOrFail(id)
 
     await artist.merge(data).save()
