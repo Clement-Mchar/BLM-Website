@@ -8,14 +8,9 @@ import { OhVueIcon, addIcons } from "oh-vue-icons";
 import { LaStrikethroughSolid } from "oh-vue-icons/icons";
 const vueQueryPluginOptions: VueQueryPluginOptions = {
   queryClientConfig: {
-    defaultOptions: { queries: { staleTime: 360000, retry:true,  }, },
-    
+    defaultOptions: { queries: { staleTime: 360000, retry: true } },
   },
   enableDevtoolsV6Plugin: true,
-}
-addIcons(LaStrikethroughSolid)
-createApp(App)
-  .component("v-icon", OhVueIcon)
-  .use(router)
-  .use(VueQueryPlugin, vueQueryPluginOptions)
-  .mount("#app");
+};
+addIcons(LaStrikethroughSolid);
+createApp(App).component("v-icon", OhVueIcon).use(router).use(VueQueryPlugin, vueQueryPluginOptions).mount("#app");

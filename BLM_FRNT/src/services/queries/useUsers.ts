@@ -121,9 +121,7 @@ export function useUser(id: number) {
     queryFn: async () => {
       const user = await blmApi.getUser(id);
       return user;
-    },
-    retry: false,
-    staleTime: 1000 * 60 * 5,
+    }
   });
 }
 export function useUpdateUser(id: number) {

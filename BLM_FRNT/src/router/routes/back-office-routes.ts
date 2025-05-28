@@ -7,6 +7,8 @@ import ArtistsList from "@/components/artists/ArtistsList.vue";
 import EditArtist from "@/components/artists/EditArtist.vue";
 import UserDetails from "@/components/users/UserDetails.vue";
 import ArtistDetails from "@/components/artists/ArtistDetails.vue";
+import AlbumsList from "@/components/albums/AlbumsList.vue";
+import CreateAlbumForm from "@/components/albums/CreateAlbumForm.vue";
 
 export default [
   {
@@ -55,6 +57,17 @@ export default [
         path: "artists/:id",
         name: "artist-details",
         component: ArtistDetails,
+      },
+      {
+        path: "albums",
+        name: "albums",
+        component: AlbumsList,
+        props: true,
+      },
+      {
+        path: "albums/create",
+        component: CreateAlbumForm,
+        props: true,
       },
     ],
     meta: { requiresAuth: true },

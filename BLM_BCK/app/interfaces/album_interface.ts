@@ -4,10 +4,10 @@ import { DateTime } from 'luxon'
 
 export interface CreateAlbumData {
       name: string
-      date: DateTime
+      date: string
       cover?: Attachment
       link?: string
-      artistIds?: string[]
+      artistIds: string[]
 }
 
 export interface UpdateAlbumData {

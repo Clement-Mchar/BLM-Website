@@ -1,7 +1,7 @@
 import ky, { HTTPError } from "ky";
 import type { KyInstance } from "ky";
 import type { ConfirmUserPayload, User } from "@/interfaces/User";
-import type { Album } from "@/interfaces/Album";
+import type { Album, CreateAlbum } from "@/interfaces/Album";
 import type { Artist, CreateArtist } from "@/interfaces/Artist";
 
 class BlmApi {
@@ -132,12 +132,44 @@ class BlmApi {
       })
       .json();
   }
-  getTracks() {
-    return this.#client.get("tracks").json();
-  }
+  createAlbum(payload: CreateAlbum): Promise<Album | null> {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(payload)) {
+      if (value == null) continue;
 
-  getTracksOfAlbum(albumId: number) {
-    return this.#client.get(`albums/${albumId}/tracks`).json();
+      formData.append(key, value instanceof File ? value : String(value));
+    }
+    return this.#client
+      .post("albums", {
+        body: formData,
+      })
+      .json();
+  }
+  getAlbum(id: string): Promise<Album | null> {
+    return this.#client.get(`albums/${id}`).json();
+  }
+  deleteAlbum(id: string): Promise<Album | null> {
+    return this.#client.delete(`albums/${id}`).json();
+  }
+  deleteAlbums(ids: string[]): Promise<void> {
+    return this.#client
+      .post("albums/delete-many", {
+        json: { ids },
+      })
+      .json();
+  }
+  getAlbumEdit(id: string): Promise<Album | null> {
+    return this.#client.get(`albums/${id}/edit`).json();
+  }
+  editAlbum(id: string, payload: Partial<Album>): Promise<Album> {
+    return this.#client.patch(`albums/${id}`, { json: payload }).json();
+  }
+  editAlbumCover(id: string, payload: FormData): Promise<Album> {
+    return this.#client
+      .patch(`albums/${id}/`, {
+        body: payload,
+      })
+      .json();
   }
 }
 

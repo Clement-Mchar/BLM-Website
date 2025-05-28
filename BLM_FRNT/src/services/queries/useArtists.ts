@@ -31,7 +31,6 @@ export function useCreateArtist() {
   return useMutation({
     mutationKey: artistKeys.create(),
     mutationFn: async (payload: CreateArtist) => {
-
       const artist = await blmApi.createArtist(payload);
       return artist;
     },
@@ -53,7 +52,6 @@ export function useCreateArtist() {
     },
     onError: () => {
       queryClient.invalidateQueries({ queryKey: artistKeys.list() });
-      console.log('fonctionne po')
     },
   });
 }
@@ -105,8 +103,6 @@ export function useArtist(id: string) {
       const artist = await blmApi.getArtistEdit(id);
       return artist;
     },
-    retry: false,
-    staleTime: 1000 * 60 * 5,
   });
 }
 export function useUpdateArtist(id: string) {
@@ -120,7 +116,6 @@ export function useUpdateArtist(id: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: artistKeys.all });
     },
-
   });
 }
 export function useUpdateArtistAvatar(id: string) {

@@ -1,14 +1,17 @@
-import type { Artist } from "@/interfaces/Artist";
-import type { Track } from "@/interfaces/Track";
-
+import { DateTime } from "luxon";
 export interface Album {
   id: string;
   name: string;
+  date: DateTime;
+  cover?: File;
+  link?: string;
+  artistIds: string[];
+}
+
+export interface CreateAlbum {
+  name: string;
   date: string;
-  coverUrl: string | null;
-  spotifyLink: string | null;
-  createdAt: string;
-  updatedAt: string;
-  artists: Artist[];
-  tracks: Track[];
+  cover?: File;
+  link?: string;
+  artistIds: string[];
 }
