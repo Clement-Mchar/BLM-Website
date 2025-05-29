@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { cn } from "@/lib/utils";
-import { X } from "lucide-vue-next";
+import type { HTMLAttributes } from 'vue'
+import { reactiveOmit } from '@vueuse/core'
+import { X } from 'lucide-vue-next'
 import {
   DialogClose,
   DialogContent,
@@ -9,30 +10,26 @@ import {
   DialogOverlay,
   DialogPortal,
   useForwardPropsEmits,
-} from "reka-ui";
-import { computed, type HTMLAttributes } from "vue";
-import { type SheetVariants, sheetVariants } from ".";
+} from 'reka-ui'
+import { cn } from '@/lib/utils'
+import { type SheetVariants, sheetVariants } from '.'
 
 interface SheetContentProps extends DialogContentProps {
-  class?: HTMLAttributes["class"];
-  side?: SheetVariants["side"];
+  class?: HTMLAttributes['class']
+  side?: SheetVariants['side']
 }
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = defineProps<SheetContentProps>();
+const props = defineProps<SheetContentProps>()
 
-const emits = defineEmits<DialogContentEmits>();
+const emits = defineEmits<DialogContentEmits>()
 
-const delegatedProps = computed(() => {
-  const { class: _, side, ...delegated } = props;
+const delegatedProps = reactiveOmit(props, 'class', 'side')
 
-  return delegated;
-});
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
 
 <template>
@@ -47,7 +44,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
       <slot />
 
       <DialogClose
-        class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-100 dark:ring-offset-neutral-950 dark:focus:ring-neutral-300 dark:data-[state=open]:bg-neutral-800"
+        class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
       >
         <X class="w-4 h-4" />
       </DialogClose>

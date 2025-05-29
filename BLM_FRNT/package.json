@@ -24,10 +24,13 @@
     "@tiptap/react": "^2.12.0",
     "@tiptap/starter-kit": "^2.12.0",
     "@tiptap/vue-3": "^2.12.0",
+    "@unovis/ts": "^1.5.2",
+    "@unovis/vue": "^1.5.2",
     "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^12.8.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "embla-carousel-vue": "^8.6.0",
     "ky": "^1.7.4",
     "lucide-vue-next": "^0.477.0",
     "luxon": "^3.6.1",
@@ -36,10 +39,12 @@
     "reka-ui": "^2.3.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
+    "vaul-vue": "^0.4.1",
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
-    "zod": "^3.24.2"
+    "vue-sonner": "^2.0.0",
+    "zod": "^3.25.34"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

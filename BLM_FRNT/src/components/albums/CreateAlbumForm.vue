@@ -105,7 +105,7 @@ const coverUrl = computed(() => {
         <Popover>
           <PopoverTrigger as-child>
             <FormControl>
-              <Button variant="outline" :class="cn('w-[240px] ps-3 text-start font-normal', !value && 'text-muted-foreground')">
+              <Button variant="ghost" :class="cn('w-[240px] ps-3 text-start font-normal', !value && 'text-muted-foreground')" class="border border-gray-200">
                 <span>{{ value ? df.format(toDate(value)) : "Pick a date" }}</span>
                 <CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
               </Button>
@@ -129,7 +129,6 @@ const coverUrl = computed(() => {
             />
           </PopoverContent>
         </Popover>
-        <FormDescription> Pick a release date </FormDescription>
         <FormMessage />
       </FormItem>
     </FormField>
