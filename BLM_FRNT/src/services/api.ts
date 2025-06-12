@@ -3,6 +3,9 @@ import type { KyInstance } from "ky";
 import type { ConfirmUserPayload, User } from "@/interfaces/User";
 import type { Album, CreateAlbum } from "@/interfaces/Album";
 import type { Artist, CreateArtist } from "@/interfaces/Artist";
+import type { CreatePost, Post } from "@/interfaces/Post";
+import type { CreateEvent, Event } from "@/interfaces/Event";
+import type { CreateVideo, Video } from "@/interfaces/Video";
 
 class BlmApi {
   #client: KyInstance;
@@ -80,13 +83,11 @@ class BlmApi {
   editUser(id: number, payload: Partial<User>): Promise<User> {
     return this.#client.patch(`users/${id}`, { json: payload }).json();
   }
-
-  getAlbums(): Promise<Album[]> {
-    return this.#client.get("albums").json();
-  }
-
   async getUsers(): Promise<User[]> {
     return await this.#client.get("users").json();
+  }
+  getAlbums(): Promise<Album[]> {
+    return this.#client.get("albums").json();
   }
 
   async getArtists(): Promise<Artist[]> {
@@ -170,6 +171,122 @@ class BlmApi {
         body: payload,
       })
       .json();
+  }
+  getPost(id: string): Promise<Post | null> {
+    return this.#client.get(`posts/${id}`).json();
+  }
+  getPostEdit(id: string): Promise<Post | null> {
+    return this.#client.get(`posts/${id}/edit`).json();
+  }
+  getPosts(): Promise<Post[]> {
+    return this.#client.get(`posts/`).json();
+  }
+  createPost(payload: CreatePost): Promise<Post | null> {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(payload)) {
+      if (value == null) continue;
+
+      formData.append(key, value instanceof File ? value : String(value));
+    }
+    return this.#client
+      .post("posts", {
+        body: formData,
+      })
+      .json();
+  }
+  deletePost(id: string): Promise<Post | null> {
+    return this.#client.delete(`posts/${id}`).json();
+  }
+  deletePosts(ids: string[]): Promise<void> {
+    return this.#client
+      .post("posts/delete-many", {
+        json: { ids },
+      })
+      .json();
+  }
+  editPost(id: string, payload: Partial<Post>): Promise<Post> {
+    return this.#client.patch(`posts/${id}`, { json: payload }).json();
+  }
+  editPostHeader(id: string, payload: FormData): Promise<Post> {
+    return this.#client
+      .patch(`posts/${id}/`, {
+        body: payload,
+      })
+      .json();
+  }
+  createEvent(payload: CreateEvent): Promise<Event | null> {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(payload)) {
+      if (value == null) continue;
+
+      formData.append(key, value instanceof File ? value : String(value));
+    }
+    return this.#client
+      .post("events", {
+        body: formData,
+      })
+      .json();
+  }
+
+  deleteEvent(id: string): Promise<Event | null> {
+    return this.#client.delete(`events/${id}`).json();
+  }
+
+  deleteEvents(ids: string[]): Promise<void> {
+    return this.#client
+      .post("events/delete-many", {
+        json: { ids },
+      })
+      .json();
+  }
+  getEventEdit(id: string): Promise<Event | null> {
+    return this.#client.get(`events/${id}/edit`).json();
+  }
+  getEvent(id: string): Promise<Event | null> {
+    return this.#client.get(`events/${id}`).json();
+  }
+  editEvent(id: string, payload: Partial<Event>): Promise<Event> {
+    return this.#client.patch(`events/${id}`, { json: payload }).json();
+  }
+  async getEvents(): Promise<Event[]> {
+    return await this.#client.get("events").json();
+  }
+  createVideo(payload: CreateVideo): Promise<Video | null> {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(payload)) {
+      if (value == null) continue;
+
+      formData.append(key, value instanceof File ? value : String(value));
+    }
+    return this.#client
+      .post("videos", {
+        body: formData,
+      })
+      .json();
+  }
+
+  deleteVideo(id: string): Promise<Video | null> {
+    return this.#client.delete(`videos/${id}`).json();
+  }
+
+  deleteVideos(ids: string[]): Promise<void> {
+    return this.#client
+      .post("videos/delete-many", {
+        json: { ids },
+      })
+      .json();
+  }
+  getVideoEdit(id: string): Promise<Video | null> {
+    return this.#client.get(`videos/${id}/edit`).json();
+  }
+  getVideo(id: string): Promise<Video | null> {
+    return this.#client.get(`videos/${id}`).json();
+  }
+  editVideo(id: string, payload: Partial<Video>): Promise<Video> {
+    return this.#client.patch(`videos/${id}`, { json: payload }).json();
+  }
+  async getVideos(): Promise<Video[]> {
+    return await this.#client.get("videos").json();
   }
 }
 
