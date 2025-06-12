@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { blmApi } from "@/services/api";
-import type { /*Artist,*/ Artist, CreateArtist } from "@/interfaces/Artist";
+import type { Artist, CreateArtist } from "@/interfaces/Artist";
 import { h, computed } from "vue";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/toast/use-toast";

@@ -6,11 +6,11 @@ import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
 
 import {
   Users,
-  UserCog,
   Guitar,
   Disc3,
   MicVocal,
   PenTool,
+  Play
 } from "lucide-vue-next";
 
 const props = withDefaults(defineProps<SidebarProps>(), {
@@ -37,17 +37,17 @@ const data = {
       ],
     },
     {
-      title: "Staff",
+      title: "Event",
       url: "#",
-      icon: UserCog,
+      icon: MicVocal,
       items: [
         {
-          title: "All Staff Members",
-          url: "#",
+          title: "All Events",
+          url: "/back-office/events",
         },
         {
-          title: "Create Staff Member",
-          url: "#",
+          title: "Create Event",
+          url: "/back-office/events/create",
         },
       ],
     },
@@ -82,32 +82,32 @@ const data = {
       ],
     },
     {
-      title: "Events",
-      url: "#",
-      icon: MicVocal,
-      items: [
-        {
-          title: "All Events",
-          url: "#",
-        },
-        {
-          title: "Create Event",
-          url: "#",
-        },
-      ],
-    },
-    {
       title: "Posts",
       url: "#",
       icon: PenTool,
       items: [
         {
           title: "All Posts",
-          url: "#",
+          url: "/back-office/posts",
         },
         {
-          title: "Create Post",
-          url: "#",
+          title: "Create Album",
+          url: "/back-office/posts/create",
+        },
+      ],
+    },
+    {
+      title: "Videos",
+      url: "#",
+      icon: Play,
+      items: [
+        {
+          title: "All Videos",
+          url: "/back-office/videos",
+        },
+        {
+          title: "Create Video",
+          url: "/back-office/videos/create",
         },
       ],
     },

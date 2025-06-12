@@ -12,12 +12,8 @@ import { validateWithZod } from "@/lib/utils";
 const route = useRoute();
 const router = useRouter();
 import { ref, watch } from "vue";
-import Select from "../ui/select/Select.vue";
-import SelectTrigger from "../ui/select/SelectTrigger.vue";
-import SelectValue from "../ui/select/SelectValue.vue";
-import SelectContent from "../ui/select/SelectContent.vue";
-import SelectGroup from "../ui/select/SelectGroup.vue";
-import SelectItem from "../ui/select/SelectItem.vue";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 const userId = Number(route.params.id);
 
 const { data: user, isLoading } = useUserToEdit(userId);

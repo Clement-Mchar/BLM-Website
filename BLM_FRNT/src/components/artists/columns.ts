@@ -41,6 +41,14 @@ export const columns: ColumnDef<Artist>[] = [
   {
     accessorKey: "bio",
     header: () => h("span", "Bio"),
+    cell: ({ row }) => {
+      const bio = (row.getValue("bio") as string);
+      if (typeof bio === "string") {
+        return h("div", { class: "lowercase" }, bio.substring(0, 50) + "...");
+      } else {
+        return h("div", { class: "italic text-gray-400" }, "Aucune bio");
+      }
+    },
   },
   {
     accessorKey: "role",

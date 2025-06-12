@@ -1,17 +1,9 @@
 <script setup lang="ts">
-
-import {
-  EditableArea,
-  EditableCancelTrigger,
-  EditableEditTrigger,
-  EditableInput,
-  EditablePreview,
-  EditableRoot,
-  EditableSubmitTrigger,
-} from "radix-vue";
+import { EditableArea, EditableCancelTrigger, EditableEditTrigger, EditablePreview, EditableRoot, EditableSubmitTrigger } from "radix-vue";
 import { useField } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import type { ZodSchema } from "zod";
+import TipTap from "@/components/TipTap.vue";
 
 const props = defineProps<{
   fieldName: string;
@@ -25,10 +17,7 @@ const props = defineProps<{
 
 const validateFn = props.schema ? toTypedSchema(props.schema) : undefined;
 
-const {
-  value: inputValue,
-  validate,
-} = useField(props.fieldName, validateFn, {
+const { value: inputValue, validate } = useField(props.fieldName, validateFn, {
   initialValue: props.defaultValue,
 });
 const handleSubmit = async () => {
@@ -41,15 +30,22 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <EditableRoot class="flex flex-col w-96" :defaultValue="props.defaultValue" :modelValue="inputValue"
-    @update:model-value="(val) => (inputValue = val)" auto-resize v-slot="{ isEditing }" submit-mode="none"
-    @submit="handleSubmit">
+  <EditableRoot
+    class="flex flex-col w-96"
+    :defaultValue="props.defaultValue"
+    :modelValue="inputValue"
+    @update:model-value="(val) => (inputValue = val)"
+    auto-resize
+    v-slot="{ isEditing }"
+    submit-mode="none"
+    @submit="handleSubmit"
+  >
     <div class="mt-1 mb-1 place-self-center">{{ fieldName }}</div>
 
-    <div class="flex flex-row border-gray-300 border-solid border-[1px] rounded-md w-full justify-start h-[37px] mb-3">
-      <EditableArea class="min-w-full min-h-full rounded-md focus-within:bg-gray-600 focus-within:pl-2">
-        <EditablePreview class="bg-gray-800 pt-[6px] rounded-md pl-2 min-w-full min-h-full" />
-        <EditableInput />
+    <div class="flex flex-row border-gray-300 border-solid border-[1px] rounded-md w-full justify-start mb-3">
+      <EditableArea class="min-w-full rounded-md">
+        <EditablePreview v-if="!isEditing" class="bg-gray-800 pt-[6px] rounded-md pl-2 min-w-full flex flex-wrap" />
+        <TipTap v-else :defaultValue="props.defaultValue" v-model="inputValue" class="flex w-full h-16" focus="none" />
       </EditableArea>
       <EditableEditTrigger v-if="!isEditing" class="ml-2" />
 

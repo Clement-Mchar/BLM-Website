@@ -7,17 +7,15 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { useRouter } from "vue-router";
 import { useCreateArtist } from "@/services/queries/useArtists";
-import { computed } from "vue";
+import { computed, h } from "vue";
 import TipTap from "../TipTap.vue";
+import { toast } from "../ui/toast";
 const MAX_FILE_SIZE = 20000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/avif", "image/png", "image/webp"];
 const formSchema = toTypedSchema(
   z.object({
     name: z.string().min(2).max(50),
-    bio: z
-      .string()
-      .max(5000)
-      .optional(),
+    bio: z.string().max(5000).optional(),
     genre: z.string().optional(),
     twitter: z.string().url().optional(),
     spotify: z.string().url().optional(),
@@ -42,6 +40,14 @@ const onSubmit = form.handleSubmit((values) => {
   createArtist.mutate(values, {
     onSuccess: () => {
       router.push({ name: "artists" });
+      toast({
+        title: "You submitted the following values:",
+        description: h(
+          "pre",
+          { class: "mt-2 w-[340px] rounded-md bg-slate-950 p-4" },
+          h("code", { class: "text-white" }, JSON.stringify(values, null, 2)),
+        ),
+      });
     },
   });
 });
@@ -71,7 +77,7 @@ const avatarUrl = computed(() => {
         <FormItem>
           <FormLabel>Bio</FormLabel>
           <FormControl class="min-w-fit w-96 h-56">
-            <TipTap v-bind="componentField" class="border rounded-sm border-gray-200 w-full h-56" focus="none" />
+            <TipTap v-bind="componentField" class="" focus="none" />
           </FormControl>
           <FormMessage />
         </FormItem>

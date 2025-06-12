@@ -1,7 +1,7 @@
 <template>
-  <div v-if="editor" class="container">
-    <div class="control-group">
-      <div class="button-group border-b-2 flex pt-1 pb-1 border-gray-300">
+  <div v-if="editor" class="container flex flex-col break-all border rounded-sm border-gray-200 w-full h-80 overflow-hidden">
+    <div class="control-group flex">
+      <div class="button-group border-b-2 flex w-full flex-wrap pt-1 pb-1 border-gray-300">
         <button type="button"
           @click="editor.chain().focus().toggleBold().run()"
           :disabled="!editor.can().chain().focus().toggleBold().run()"
@@ -29,7 +29,7 @@
         </button>
       </div>
     </div>
-    <editor-content :editor="editor" class="p-2" />
+    <editor-content :editor="editor" class="p-2 h-full max-w-svh overflow-y-scroll overflow-x-hidden" />
   </div>
 </template>
 

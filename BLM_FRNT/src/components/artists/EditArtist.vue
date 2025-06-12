@@ -8,6 +8,7 @@ import ToastAction from "../ui/toast/ToastAction.vue";
 import { h } from "vue";
 import { validateWithZod } from "@/lib/utils";
 import Input from "../ui/input/Input.vue";
+import EditableTipTap from "../ui/editable/EditableTipTap.vue";
 const route = useRoute();
 const router = useRouter();
 
@@ -133,7 +134,7 @@ const handleChange = async (e: Event) => {
   <div v-if="isLoading">Loading...</div>
   <div v-else-if="artist" class="mt-4">
     <EditableField fieldName="Name" :schema="name" :default-value="artist!.name" :entity-id="artist!.id" @save="handleSave" />
-    <EditableField fieldName="Bio" :schema="bio" :default-value="artist!.bio" :entity-id="artist!.id" @save="handleSave" />
+    <EditableTipTap fieldName="Bio" :schema="bio" :default-value="artist!.bio" :entity-id="artist!.id" @save="handleSave" />
     <EditableField fieldName="Genre" :schema="genre" :default-value="artist!.genre" :entity-id="artist!.id" @save="handleSave" />
     <EditableField fieldName="Twitter" :schema="twitter" :default-value="artist!.twitter" :entity-id="artist!.id" @save="handleSave" />
     <EditableField fieldName="Insta" :schema="insta" :default-value="artist!.insta" :entity-id="artist!.id" @save="handleSave" />
