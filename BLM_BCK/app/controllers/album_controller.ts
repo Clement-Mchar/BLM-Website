@@ -3,7 +3,7 @@ import { AlbumService } from '#services/album_service'
 import { createAlbumValidator, updateAlbumValidator } from '#validators/album_validators'
 import { HttpContext } from '@adonisjs/core/http'
 import { attachmentManager } from '@jrmc/adonis-attachment'
-
+import { RawAlbumData } from '../interfaces/album_interface.js'
 @inject()
 export default class AlbumController {
   constructor(private albumService: AlbumService) {}
@@ -13,7 +13,22 @@ export default class AlbumController {
   }
 
   async store({ request }: HttpContext) {
-    const data = await request.validateUsing(createAlbumValidator)
+    const rawArtistIds = request.input('artistIds') as string | undefined
+    const artistIds = rawArtistIds ? rawArtistIds.split(',').map((id) => id.trim()) : []
+
+    const allWithoutArtistIds = Object.fromEntries(
+      Object.entries(request.all()).filter(([key]) => key !== 'artistIds')
+    )
+
+    const dataToValidate: RawAlbumData = {
+      ...allWithoutArtistIds,
+      artistIds,
+    }
+
+    const data = await request.validateUsing(createAlbumValidator, {
+      data: dataToValidate,
+    })
+
     const coverFile = request.file('cover')
     const attachment = coverFile ? await attachmentManager.createFromFile(coverFile) : undefined
     return this.albumService.store({
@@ -41,9 +56,12 @@ export default class AlbumController {
   }
   async update({ request, params }: HttpContext) {
     const id = params.id
+    const artistIds = request.input('artistIds') as  string[] | undefined
+  
+
     const data = await request.validateUsing(updateAlbumValidator)
     const coverFile = request.file('cover')
     const attachment = coverFile ? await attachmentManager.createFromFile(coverFile) : undefined
-    return this.albumService.update(id, { ...data, cover: attachment })
+    return this.albumService.update(id, { ...data, cover: attachment, artistIds })
   }
 }

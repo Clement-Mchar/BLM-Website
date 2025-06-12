@@ -40,15 +40,19 @@ export const columns: ColumnDef<Album>[] = [
   },
   {
     accessorKey: "date",
-    header: () => h("span", "Bio"),
+    header: () => h("span", "Date"),
   },
   {
     accessorKey: "link",
     header: () => h("span", "Link"),
   },
   {
-    accessorKey: "artistIds",
-    header: () => h("span", "Artists"),
+  accessorKey: "artists",
+  header: () => h("span", "Artists"),
+  cell: ({ row }) => {
+    const artists = row.getValue("artists") as { id: string; name: string }[]
+    return h("span", artists.map((artist) => artist.name).join(", "))
+    },
   },
   {
     accessorKey: "createdAt",

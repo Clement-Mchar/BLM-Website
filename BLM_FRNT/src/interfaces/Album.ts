@@ -5,7 +5,7 @@ export interface Album {
   date: DateTime;
   cover?: File;
   link?: string;
-  artistIds: string[];
+  artistIds?: string[];
 }
 
 export interface CreateAlbum {

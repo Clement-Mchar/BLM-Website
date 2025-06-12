@@ -1,38 +1,24 @@
 <script setup lang="ts">
-import { CalendarDate, DateFormatter, getLocalTimeZone, parseDate, today, type DateValue } from "@internationalized/date";
+import { CalendarDate, getLocalTimeZone, parseDate, today } from "@internationalized/date";
 import { toTypedSchema } from "@vee-validate/zod";
-import { Calendar as CalendarIcon, ChevronsUpDown } from "lucide-vue-next";
 import { DateTime } from "luxon";
-import { toDate } from "reka-ui/date";
 import { useForm } from "vee-validate";
-import { computed, h, isReactive, reactive, ref } from "vue";
+import { computed, h } from "vue";
 import { z } from "zod";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "@/components/ui/toast";
 import { useCreateAlbum } from "@/services/queries/useAlbums";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "vue-router";
-import {
-  Combobox,
-  ComboboxAnchor,
-  ComboboxEmpty,
-  ComboboxGroup,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxItemIndicator,
-  ComboboxList,
-  ComboboxTrigger,
-} from "@/components/ui/combobox";
 import { useArtists } from "@/services/queries/useArtists";
+import DatePicker from "../DatePicker.vue";
+import ComboBox from "../ComboBox.vue";
+
 const MAX_FILE_SIZE = 20000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/avif", "image/png", "image/webp"];
-const df = new DateFormatter("en-US", {
-  dateStyle: "long",
-});
+
+const { data: artists } = useArtists();
 
 const formSchema = toTypedSchema(
   z.object({
@@ -47,19 +33,18 @@ const formSchema = toTypedSchema(
     artistIds: z.array(z.string()).min(1),
   }),
 );
-
-const placeholder = reactive({});
-
 const form = useForm({
   validationSchema: formSchema,
-  initialValues: {},
+  initialValues: { artistIds: [] },
 });
+
 const createAlbum = useCreateAlbum();
 const router = useRouter();
 const value = computed({
   get: () => (form.values.date ? parseDate(form.values.date) : undefined),
   set: (val) => val,
 });
+
 const onSubmit = form.handleSubmit((values) => {
   const payload = {
     ...values,
@@ -102,33 +87,20 @@ const coverUrl = computed(() => {
     <FormField name="date">
       <FormItem class="flex flex-col">
         <FormLabel>Date</FormLabel>
-        <Popover>
-          <PopoverTrigger as-child>
-            <FormControl>
-              <Button variant="ghost" :class="cn('w-[240px] ps-3 text-start font-normal', !value && 'text-muted-foreground')" class="border border-gray-200">
-                <span>{{ value ? df.format(toDate(value)) : "Pick a date" }}</span>
-                <CalendarIcon class="ms-auto h-4 w-4 opacity-50" />
-              </Button>
-              <input hidden />
-            </FormControl>
-          </PopoverTrigger>
-          <PopoverContent class="w-auto p-0">
-            <Calendar
-              v-model="value"
-              calendar-label="Date"
-              initial-focus
-              :min-value="new CalendarDate(1900, 1, 1)"
-              :max-value="today(getLocalTimeZone())"
-              @update:model-value="
-                (v) => {
-                  console.log('update:model-value', v, typeof v);
-                  console.log('isReactive:', isReactive(v));
-                  form.setFieldValue('date', v!.toString());
-                }
-              "
-            />
-          </PopoverContent>
-        </Popover>
+        <FormControl>
+          <DatePicker
+            v-model="value"
+            calendar-label="Date"
+            initial-focus
+            :min-value="new CalendarDate(1900, 1, 1)"
+            :max-value="today(getLocalTimeZone())"
+            @update:model-value="
+              (v) => {
+                form.setFieldValue('date', v!.toString());
+              }
+            "
+          />
+        </FormControl>
         <FormMessage />
       </FormItem>
     </FormField>
@@ -140,6 +112,24 @@ const coverUrl = computed(() => {
         </div>
         <FormControl>
           <Input id="picture" type="file" @change="handleChange" @blur="handleBlur" />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    </FormField>
+    <FormField v-slot="{ value, handleChange }" name="artistIds">
+      <FormItem>
+        <FormLabel>Artists</FormLabel>
+        <FormControl>
+          <ComboBox :items="artists ?? []" :model-value="value" @update:modelValue="handleChange" placeholder="Select artists" />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    </FormField>
+    <FormField v-slot="{ componentField }" name="link">
+      <FormItem>
+        <FormLabel>Link</FormLabel>
+        <FormControl>
+          <Input type="text" placeholder="link" autocomplete="link" v-bind="componentField" />
         </FormControl>
         <FormMessage />
       </FormItem>

@@ -118,7 +118,7 @@ export function useUpdateAlbum(id: string) {
     },
   });
 }
-export function useUpdateAlbumAvatar(id: string) {
+export function useUpdateAlbumCover(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: computed(() => albumKeys.update(id)),

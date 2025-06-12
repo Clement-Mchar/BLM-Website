@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 
 const baseAlbumSchema = {
   name: vine.string().minLength(1).maxLength(100),
-  date: vine.date().transform((date) => DateTime.fromJSDate(date)),
+  date: vine.string().transform((date) => DateTime.fromISO(date)),
   cover: vine
     .file({
       size: '20mb',
@@ -18,10 +18,11 @@ export const createAlbumValidator = vine.compile(vine.object(baseAlbumSchema))
 
 export const updateAlbumValidator = vine.compile(
   vine.object({
-    name: baseAlbumSchema.name.optional(),
-    date: baseAlbumSchema.date.optional(),
+    name : baseAlbumSchema.name.optional(),
+    date : baseAlbumSchema.date.optional(),
     cover: baseAlbumSchema.cover.optional(),
-    link: baseAlbumSchema.link.optional(),
+    link : baseAlbumSchema.link.optional(),
     artistIds: baseAlbumSchema.artistIds.optional(),
   })
+  
 )
