@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAlbums, useDeleteAlbums } from "@/services/queries/useAlbums";
+import { useAlbums, useDeleteAlbums } from "@blm/shared";
 import GenericTable from "@components/GenericTable.vue";
 import { columns as albumColumns } from "@/components/albums/columns";
 const { mutate: deleteAlbums } = useDeleteAlbums();

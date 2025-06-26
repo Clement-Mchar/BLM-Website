@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/vue-query";
-import { blmApi } from "@/services/api";
+import { blmApi } from "@blm/shared";
 
 export function useAuth() {
   return useQuery({

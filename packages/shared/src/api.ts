@@ -1,11 +1,11 @@
 import ky, { HTTPError } from "ky";
 import type { KyInstance } from "ky";
-import type { ConfirmUserPayload, User } from "../interfaces/User";
-import type { Album, CreateAlbum } from "../interfaces/Album";
-import type { Artist, CreateArtist } from "../interfaces/Artist";
-import type { CreatePost, Post } from "../interfaces/Post";
-import type { CreateEvent, Event } from "../interfaces/Event";
-import type { CreateVideo, Video } from "../interfaces/Video";
+import type { ConfirmUserPayload, User } from "./types/User";
+import type { Album, CreateAlbum } from "./types/Album";
+import type { Artist, CreateArtist } from "./types/Artist";
+import type { CreatePost, Post } from "./types/Post";
+import type { CreateEvent, Event } from "./types/Event";
+import type { CreateVideo, Video } from "./types/Video";
 
 class BlmApi {
   #client: KyInstance;

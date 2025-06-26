@@ -1,5 +1,5 @@
 {
-  "name": "blm-frntnd",
+  "name": "@blm/front",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,11 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.13"
+    "@blm/shared": "workspace:*",
+    "@tanstack/vue-query": "^5.81.2",
+    "postcss-import": "^16.1.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.5",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vue-tsc": "^2.2.8"

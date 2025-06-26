@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EditableField from "../ui/editable/EditableField.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUpdateVideo, useVideo } from "@/services/queries/useVideos";
+import { useUpdateVideo, useVideo, useArtists } from "@blm/shared";
 import { z } from "zod";
 import { useToast } from "../ui/toast";
 import ToastAction from "../ui/toast/ToastAction.vue";
@@ -9,7 +9,6 @@ import { h, ref, watch } from "vue";
 import { validateWithZod } from "@/lib/utils";
 import { VideoCategory } from "../../../../BLM_BCK/app/enums";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useArtists } from "@/services/queries/useArtists";
 import ComboBox from "../ComboBox.vue";
 
 const route = useRoute();

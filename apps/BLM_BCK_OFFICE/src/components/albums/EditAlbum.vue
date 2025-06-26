@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EditableField from "../ui/editable/EditableField.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUpdateAlbum, useAlbum, useUpdateAlbumCover } from "@/services/queries/useAlbums";
+import { useUpdateAlbum, useAlbum, useUpdateAlbumCover, useArtists } from "@blm/shared";
 import { z } from "zod";
 import { useToast } from "../ui/toast";
 import ToastAction from "../ui/toast/ToastAction.vue";
@@ -11,7 +11,6 @@ import Input from "../ui/input/Input.vue";
 import { CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
 
 import DatePicker from "../DatePicker.vue";
-import { useArtists } from "@/services/queries/useArtists";
 import ComboBox from "../ComboBox.vue";
 import { ref, watch } from "vue";
 

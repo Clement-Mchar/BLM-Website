@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { useEvent, useDeleteEvent } from "@/services/queries/useEvents";
+import { useEvent, useDeleteEvent } from "@blm/shared";
 import ItemDetailOptions from "@/components/ItemDetailsOptions.vue";
 import ItemDetails from "../ItemDetails.vue";
 import { useRoute, useRouter } from "vue-router";

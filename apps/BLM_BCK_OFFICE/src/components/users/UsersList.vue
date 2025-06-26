@@ -3,10 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { useUsers } from "@/services/queries/useUsers";
+import { useUsers, useDeleteUsers } from "@blm/shared";
 import GenericTable from "@components/GenericTable.vue";
 import { columns as userColumns } from "@/components/users/columns";
-import { useDeleteUsers } from "@/services/queries/useUsers";
 const { mutate: deleteUsers } = useDeleteUsers();
 const handleDeleteSelected = (ids: number[]) => {
   deleteUsers(ids);

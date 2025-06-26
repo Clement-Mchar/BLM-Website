@@ -15,12 +15,14 @@ export class PostService {
     await post.merge(postData).save()
     if (artistIds && artistIds.length > 0) {
       await post.related('artists').attach(artistIds)
+      await post.load('artists')
     }
     if (albumIds && albumIds.length > 0) {
       await post.related('albums').attach(albumIds)
+      await post.load('albums')
     }
-    await post.load('artists')
-    await post.load('albums')
+    
+    
     return post
   }
 

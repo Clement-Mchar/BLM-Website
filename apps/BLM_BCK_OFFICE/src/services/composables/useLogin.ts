@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { blmApi } from "@/services/api";
+import { blmApi } from "@blm/shared";
 import { useQueryClient } from "@tanstack/vue-query";
 import { useToast } from "@/components/ui/toast";
 import { ToastAction } from "@/components/ui/toast";

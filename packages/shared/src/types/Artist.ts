@@ -1,3 +1,5 @@
+import type { UploadedFile } from "./UploadedFile"
+
 export interface Artist  {
     id: string
     name: string
@@ -5,7 +7,7 @@ export interface Artist  {
     bio?: string
     genre?: string
     twitter?: string
-    avatar?: File
+    avatar?: UploadedFile
     insta?: string
     role?: string
 }

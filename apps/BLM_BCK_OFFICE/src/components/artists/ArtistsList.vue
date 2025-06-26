@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { useArtists, useDeleteArtists } from "@/services/queries/useArtists";
+import { useArtists, useDeleteArtists } from "@blm/shared";
 import GenericTable from "@components/GenericTable.vue";
 import { columns as artistColumns } from "@/components/artists/columns";
 const { mutate: deleteArtists } = useDeleteArtists();

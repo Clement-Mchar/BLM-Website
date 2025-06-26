@@ -1,5 +1,5 @@
 import { h } from "vue";
-import type { Post } from "@/interfaces/Post";
+import type { Post } from "@blm/shared";
 import type { ColumnDef } from "@tanstack/vue-table";
 import { ArrowUpDown } from "lucide-vue-next";
 import DropdownAction from "@/components/posts/PostDropDown.vue";

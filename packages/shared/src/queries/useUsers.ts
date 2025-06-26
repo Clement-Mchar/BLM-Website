@@ -1,11 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
-import { blmApi } from "@/services/api";
-import type { ConfirmUserPayload, CreateUserPayload, User } from "@/interfaces/User";
-import { computed, h } from "vue";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/toast/use-toast";
-
-const { toast } = useToast();
+import { blmApi } from '@blm/shared';
+import type { ConfirmUserPayload, CreateUserPayload, User } from '@blm/shared/types'
+import { computed } from "vue";
 const userKeys = {
   all: ["users"] as const,
   list: () => [...userKeys.all, "list"] as const,
@@ -43,21 +39,8 @@ export function useCreateUser() {
       const user = await blmApi.createUser(userData);
       return user;
     },
-    onSuccess: (user) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: userKeys.list() });
-      toast({
-        title: "User created",
-        description: `User ${user?.username} created`,
-        action: h(
-          ToastAction,
-          {
-            altText: `User created`,
-          },
-          {
-            default: () => "Continue",
-          },
-        ),
-      });
     },
     onError: () => {
       queryClient.invalidateQueries({ queryKey: userKeys.list() });
@@ -74,21 +57,8 @@ export function useDeleteUser(id: number) {
       await blmApi.deleteUser(user!.id);
       return user;
     },
-    onSuccess: (user) => {
-      queryClient.invalidateQueries({ queryKey: userKeys.list() });
-      toast({
-        title: "User deleted",
-        description: `${user?.username} deleted from database.`,
-        action: h(
-          ToastAction,
-          {
-            altText: `User deleted`,
-          },
-          {
-            default: () => "Continue",
-          },
-        ),
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: userKeys.list() }); 
     },
   });
 }

@@ -6,12 +6,11 @@ import Button from "@/components/Button.vue";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "vue-router";
-import { useCreateVideo } from "@/services/queries/useVideos";
+import { useCreateVideo, useArtists } from "@blm/shared";
 import { h } from "vue";
 import { toast } from "../ui/toast";
 import { VideoCategory } from "../../../../BLM_BCK/app/enums";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useArtists } from "@/services/queries/useArtists";
 import ComboBox from "../ComboBox.vue";
 const { data: artists } = useArtists();
 

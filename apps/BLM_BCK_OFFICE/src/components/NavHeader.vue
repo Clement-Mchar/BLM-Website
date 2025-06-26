@@ -21,9 +21,9 @@
 import Button from "~/components/Button.vue";
 import { RouterLink } from "vue-router";
 import { useLogout } from "@/services/composables/useLogout";
-import { useAuth } from "@/services/queries/useAuth";
+import { useAuth } from "@blm/shared";
 const { data: auth } = useAuth();
-const { mutate: logout } = useLogout();
+const { mutate: logout } = useLogout(); 
 </script>
 
 <style scoped>

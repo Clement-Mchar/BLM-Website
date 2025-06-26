@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useDeleteUser } from "@/services/queries/useUsers";
+import { useDeleteUser } from "@blm/shared";
 import DataTableDropDown from "../DataTableDropDown.vue";
 
 const props = defineProps<{ user: { id: number } }>();

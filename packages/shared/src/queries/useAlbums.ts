@@ -1,10 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
-import { blmApi } from "@/services/api";
-import type { /*Album,*/ Album, CreateAlbum } from "../../interfaces/Album";
-import { h, computed } from "vue";
-import { useToast } from "@/components/ui/toast/use-toast";
+import { blmApi } from '@blm/shared';
+import type { Album, CreateAlbum } from '@blm/shared/types'
+import { computed } from "vue";
 
-const { toast } = useToast();
 
 const albumKeys = {
   all: ["albums"] as const,

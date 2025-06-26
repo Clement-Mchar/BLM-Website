@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import authRoutes from "@/router/routes/auth-routes";
 import backofficeRoutes from "@/router/routes/back-office-routes";
-import { blmApi } from "@/services/api";
+import { blmApi } from "@blm/shared";
 
 const routes = [...authRoutes, ...backofficeRoutes];
 

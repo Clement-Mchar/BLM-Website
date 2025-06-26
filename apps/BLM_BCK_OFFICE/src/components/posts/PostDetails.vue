@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { usePost, useDeletePost } from "@/services/queries/usePosts";
+import { usePost, useDeletePost } from "@blm/shared";
 import ItemDetailOptions from "@/components/ItemDetailsOptions.vue";
 import ItemDetails from "../ItemDetails.vue";
 import { useRoute, useRouter } from "vue-router";

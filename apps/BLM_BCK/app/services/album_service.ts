@@ -45,6 +45,7 @@ export class AlbumService {
   }
   async show(id: string) {
     const album = await Album.findOrFail(id)
+    album.cover?.url
     return album
   }
   async update(id: string, data: UpdateAlbumData) {

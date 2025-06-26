@@ -1,5 +1,5 @@
 import { h } from "vue";
-import type { Album } from "@/interfaces/Album";
+import type { Album } from "@blm/shared"
 import type { ColumnDef } from "@tanstack/vue-table";
 import { ArrowUpDown } from "lucide-vue-next";
 import DropdownAction from "@/components/albums/AlbumDropDown.vue";

@@ -8,10 +8,9 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "@/components/ui/toast";
-import { useCreateAlbum } from "@/services/queries/useAlbums";
+import { useCreateAlbum, useArtists } from "@blm/shared";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "vue-router";
-import { useArtists } from "@/services/queries/useArtists";
 import DatePicker from "../DatePicker.vue";
 import ComboBox from "../ComboBox.vue";
 

@@ -1,11 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
-import { blmApi } from "@/services/api";
-import type { Artist, CreateArtist } from "../../interfaces/Artist";
-import { h, computed } from "vue";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/toast/use-toast";
+import { blmApi } from '@blm/shared';
+import type { Artist, CreateArtist } from '@blm/shared/types'
+import { computed } from "vue";
 
-const { toast } = useToast();
 const artistKeys = {
   all: ["artists"] as const,
   list: () => [...artistKeys.all, "list"] as const,
@@ -34,21 +31,8 @@ export function useCreateArtist() {
       const artist = await blmApi.createArtist(payload);
       return artist;
     },
-    onSuccess: (artist) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: artistKeys.list() });
-      toast({
-        title: "Artist created",
-        description: `Artist ${artist?.name} created`,
-        action: h(
-          ToastAction,
-          {
-            altText: `Artist created`,
-          },
-          {
-            default: () => "Continue",
-          },
-        ),
-      });
     },
     onError: () => {
       queryClient.invalidateQueries({ queryKey: artistKeys.list() });
@@ -65,21 +49,8 @@ export function useDeleteArtist(id: string) {
       await blmApi.deleteArtist(artist!.id);
       return artist;
     },
-    onSuccess: (artist) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: artistKeys.list() });
-      toast({
-        title: "Artist deleted",
-        description: `${artist?.name} deleted from database.`,
-        action: h(
-          ToastAction,
-          {
-            altText: `Artist deleted`,
-          },
-          {
-            default: () => "Continue",
-          },
-        ),
-      });
     },
   });
 }

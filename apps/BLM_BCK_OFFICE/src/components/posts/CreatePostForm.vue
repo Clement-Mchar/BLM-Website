@@ -6,14 +6,12 @@ import Button from "@/components/Button.vue";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "vue-router";
-import { useCreatePost } from "@/services/queries/usePosts";
+import { useCreatePost, useArtists, useAlbums } from "@blm/shared";
 import { computed, h } from "vue";
 import TipTap from "../TipTap.vue";
 import { toast } from "../ui/toast";
 import { PostCategory } from "../../../../BLM_BCK/app/enums";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useArtists } from "@/services/queries/useArtists";
-import { useAlbums } from "@/services/queries/useAlbums";
 import ComboBox from "../ComboBox.vue";
 
 const MAX_FILE_SIZE = 20000000;

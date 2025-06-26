@@ -8,7 +8,7 @@ import { useField } from "vee-validate";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { useCreateUser } from "@/services/queries/useUsers";
+import { useCreateUser } from "@blm/shared";
 import { useRouter } from "vue-router";
 
 const formSchema = toTypedSchema(

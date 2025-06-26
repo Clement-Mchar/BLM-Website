@@ -1,5 +1,5 @@
 import { h } from "vue";
-import type { Artist } from "../../../../../shared/interfaces/Artist";
+import type { Artist } from "@blm/shared";
 import type { ColumnDef } from "@tanstack/vue-table";
 import { ArrowUpDown } from "lucide-vue-next";
 import DropdownAction from "@/components/artists/ArtistDropDown.vue";

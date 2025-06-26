@@ -4,7 +4,7 @@ import { ArrowUpDown } from "lucide-vue-next";
 import DropdownAction from "@/components/videos/VideoDropDown.vue";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "../ui/checkbox";
-import type { Video } from "../../../../../shared/interfaces/Video";
+import type { Video } from "@blm/shared";
 export const columns: ColumnDef<Video>[] = [
   {
     id: "select",

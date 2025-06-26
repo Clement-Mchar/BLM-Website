@@ -2,6 +2,7 @@
   "name": "blm",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "pnpm -r run dev"
   },

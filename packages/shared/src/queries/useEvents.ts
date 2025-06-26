@@ -1,11 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
-import { blmApi } from "@/services/api";
-import type { Event, CreateEvent } from "../../interfaces/Event";
-import { h, computed } from "vue";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/toast/use-toast";
+import { blmApi } from '@blm/shared';
+import type { Event, CreateEvent } from '@blm/shared/types'
+import { computed } from "vue";
 
-const { toast } = useToast();
 const eventKeys = {
   all: ["events"] as const,
   list: () => [...eventKeys.all, "list"] as const,
@@ -34,21 +31,8 @@ export function useCreateEvent() {
       const event = await blmApi.createEvent(payload);
       return event;
     },
-    onSuccess: (event) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: eventKeys.list() });
-      toast({
-        title: "Event created",
-        description: `Event ${event?.name} created`,
-        action: h(
-          ToastAction,
-          {
-            altText: `Event created`,
-          },
-          {
-            default: () => "Continue",
-          },
-        ),
-      });
     },
     onError: () => {
       queryClient.invalidateQueries({ queryKey: eventKeys.list() });
@@ -65,24 +49,12 @@ export function useDeleteEvent(id: string) {
       await blmApi.deleteEvent(event!.id);
       return event;
     },
-    onSuccess: (event) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: eventKeys.list() });
-      toast({
-        title: "Event deleted",
-        description: `${event?.name} deleted from database.`,
-        action: h(
-          ToastAction,
-          {
-            altText: `Event deleted`,
-          },
-          {
-            default: () => "Continue",
-          },
-        ),
-      });
     },
   });
 }
+
 
 export function useDeleteEvents() {
   const queryClient = useQueryClient();

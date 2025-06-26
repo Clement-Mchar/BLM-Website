@@ -5,7 +5,7 @@
 <script setup lang="ts">
 
 import { ref } from "vue";
-import { useDeleteEvent } from "@/services/queries/useEvents";
+import { useDeleteEvent } from "@blm/shared";
 
 import DataTableDropDown from "../DataTableDropDown.vue";
 

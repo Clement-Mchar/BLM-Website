@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
+import type { UploadedFile } from "./UploadedFile";
 export interface Album {
   id: string;
   name: string;
   date: DateTime;
-  cover?: File;
+  cover?: UploadedFile;
   link?: string;
   artistIds?: string[];
 }

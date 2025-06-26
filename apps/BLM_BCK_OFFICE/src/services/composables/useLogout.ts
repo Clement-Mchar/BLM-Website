@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/vue-query";
-import { blmApi } from "@/services/api";
+import { blmApi } from "@blm/shared";
 import router from "@/router";
 
 export function useLogout() {

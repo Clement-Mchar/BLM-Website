@@ -1,5 +1,5 @@
 import { h } from "vue";
-import type { Event } from "../../../../../shared/interfaces/Event";
+import type { Event } from "@blm/shared";
 import type { ColumnDef } from "@tanstack/vue-table";
 import { ArrowUpDown } from "lucide-vue-next";
 import DropdownAction from "@/components/events/EventDropDown.vue";

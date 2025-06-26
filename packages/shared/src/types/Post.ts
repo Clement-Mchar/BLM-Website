@@ -1,9 +1,10 @@
+import type { UploadedFile } from "./UploadedFile"
 
 
 export interface Post {
   id: string
   title: string
-  header?: File
+  header?: UploadedFile
   body: string
   user: Object
   category: string

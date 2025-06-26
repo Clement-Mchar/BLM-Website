@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { useArtist, useDeleteArtist } from "@/services/queries/useArtists";
+import { useArtist, useDeleteArtist } from "@blm/shared";
 import ItemDetailOptions from "@/components/ItemDetailsOptions.vue";
 import ItemDetails from "../ItemDetails.vue";
 import { useRoute, useRouter } from "vue-router";

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EditableField from "../ui/editable/EditableField.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUpdateUser, useUserToEdit } from "@/services/queries/useUsers";
+import { useUpdateUser, useUserToEdit } from "@blm/shared";
 import { z } from "zod";
 import { UserRole } from "../../../../BLM_BCK/app/enums";
 import { useToast } from "../ui/toast";

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EditableField from "../ui/editable/EditableField.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUpdateArtist, useArtist, useUpdateArtistAvatar } from "@/services/queries/useArtists";
+import { useUpdateArtist, useArtist, useUpdateArtistAvatar } from "@blm/shared";
 import { z } from "zod";
 import { useToast } from "../ui/toast";
 import ToastAction from "../ui/toast/ToastAction.vue";

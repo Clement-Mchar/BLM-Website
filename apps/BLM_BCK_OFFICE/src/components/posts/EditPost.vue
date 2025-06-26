@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EditableField from "../ui/editable/EditableField.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUpdatePost, usePost, useUpdatePostHeader } from "@/services/queries/usePosts";
+import { useUpdatePost, usePost, useUpdatePostHeader, useAlbums, useArtists } from "@blm/shared";
 import { z } from "zod";
 import { useToast } from "../ui/toast";
 import ToastAction from "../ui/toast/ToastAction.vue";
@@ -11,9 +11,7 @@ import Input from "../ui/input/Input.vue";
 import EditableTipTap from "../ui/editable/EditableTipTap.vue";
 import { PostCategory } from "../../../../BLM_BCK/app/enums";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useArtists } from "@/services/queries/useArtists";
 import ComboBox from "../ComboBox.vue";
-import { useAlbums } from "@/services/queries/useAlbums";
 
 const route = useRoute();
 const router = useRouter();

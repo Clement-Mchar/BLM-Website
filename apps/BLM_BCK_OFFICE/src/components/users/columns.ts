@@ -1,5 +1,5 @@
 import { h } from "vue";
-import type { User } from "@/interfaces/User";
+import type { User } from "@blm/shared";
 import type { ColumnDef } from "@tanstack/vue-table";
 import { ArrowUpDown } from "lucide-vue-next";
 import DropdownAction from "@/components/users/UserDropDown.vue";

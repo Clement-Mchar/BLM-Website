@@ -6,7 +6,7 @@ import Button from "@/components/Button.vue";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "vue-router";
-import { useCreateArtist } from "@/services/queries/useArtists";
+import { useCreateArtist } from "@blm/shared";
 import { computed, h } from "vue";
 import TipTap from "../TipTap.vue";
 import { toast } from "../ui/toast";

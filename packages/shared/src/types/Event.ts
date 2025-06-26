@@ -9,6 +9,7 @@ export interface Event {
   reservation?: string
   artistIds?: string[];
 }
+
 export interface CreateEvent {
   name: string;
   description?: string
