@@ -72,7 +72,7 @@ export function useEvent(id: string) {
   return useQuery({
     queryKey: computed(() => eventKeys.detail(id)),
     queryFn: async () => {
-      const event = await blmApi.getEventEdit(id);
+      const event = await blmApi.getEvent(id);
       return event;
     },
   });

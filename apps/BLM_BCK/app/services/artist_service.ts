@@ -36,13 +36,15 @@ export class ArtistService {
   }
 
   async show(id: string) {
-    const artist = await Artist.findOrFail(id)
+    const artist = (await Artist.query().where('id', id).preload('albums').preload('videos').firstOrFail())
     return artist
   }
   async update(id: string, data: UpdateArtistData) {
     const artist = await Artist.findOrFail(id)
-
-    await artist.merge(data).save()
+    const cleanArtistData = Object.fromEntries(
+      Object.entries(data).filter(([_, v]) => v !== undefined)
+    )
+    await artist.merge(cleanArtistData).save()
     return artist
   }
 }

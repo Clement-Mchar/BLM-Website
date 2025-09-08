@@ -1,79 +1,149 @@
-:root {
-	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.cdnfonts.com/css/pistilli");
+@import url('https://fonts.cdnfonts.com/css/quicksand?styles=170041,737,738,739,740,741,735,736');
+@import "tailwindcss";
+@import "@nuxt/ui";
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-	color: rgba(255, 255, 255, 0.87);
-  background-color: #001a25;
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 
-a {
-	font-weight: 500;
-	color: #00b3ff;
-	text-decoration: inherit;
-}
-a:hover {
-	color: #00b3ff;
-}
+@theme {
+	--font-sans: Montserrat, sans-serif;
+	--font-mono: "JetBrains Mono", monospace;
+	--font-pixel: "Satoshi", sans-serif;
+	--font-departure: "Silkscreen", sans-serif;
 
-body {
-  height: 100%;
-	display: flex;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-  flex-direction: column;
-}
+	--color-background-100: #e5e5e5;
+	--color-background-200: #f5cdc7;
+	--color-background-300: var(--sand-4);
+	--color-background-400: var(--sand-5);
+	--color-background-500: var(--sand-6);
 
-h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
-}
+	--color-content-100: var(--sand-12);
+	--color-content-200: var(--sand-11);
+	--color-content-300: var(--sand-10);
+	--color-content-400: var(--sand-9);
 
-button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
-}
-button:hover {
-	border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
-}
+	--color-accent-100: #191414;
+	--color-accent-200: #ed5d4e;
+	--color-accent-300: var(--ruby-7);
 
-.card {
-	padding: 2em;
+	--animate-fade-in: fade-in 1s ease-out forwards;
+	--animate-fade-out: fade-out 2s ease-out forwards;
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 100%;
+		}
+	}
+
+	@keyframes fade-out {
+		0% {
+			opacity: 100%;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
 }
 
-#app {
-	text-align: center;
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
 }
 
-@media (prefers-color-scheme: light) {
+@layer base {
 	:root {
-		color: #213547;
-		background-color: #ffffff;
+		font-family: Montserrat, Avenir, Helvetica, Arial, sans-serif;
+		line-height: 1.5;
+		font-weight: 400;
+
+		color: #ed5d4e;
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	a {
+		text-decoration: inherit;
+		font-family: inherit;
 	}
 	a:hover {
-		color: #00b3ff;
+		color: #ed5d4e;
+	}
+
+	body {
+		height: 100%;
+		display: flex;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		flex-direction: column;
+	}
+
+	h1 {
+		font-size: 3.2em;
+		font-family: pistilli;
+		line-height: 1.1;
+	}
+	h2 {
+		font-weight: 200;
+		font-family: pistilli, sans-serif;
+		line-height: 1.1;
+	}
+	h3 {
+		font-family: Montserrat, sans-serif;
+		font-weight: 300;
 	}
 	button {
-		background-color: #f9f9f9;
+		font-size: 1em;
+		font-weight: 500;
+		font-family: inherit;
+		cursor: pointer;
+		transition: border-color 0.25s;
+	}
+	.navbar {
+		font-family: Montserrat, sans-serif;
+		font-weight: 300;
+	}
+	.card {
+		padding: 2em;
+	}
+	p {
+		font-family: Montserrat, sans-serif;
+		font-weight: 300;
+		font-style: italic;
+	}
+	#app {
+		text-align: center;
+	}
+	button.my-dot-class.size-3 {
+		width: 2px !important;
+		height: 2px !important;
+	}
+	@media (prefers-color-scheme: light) {
+		:root {
+			color: #213547;
+			background-color: #ffffff;
+		}
+		a:hover {
+			color: #00b3ff;
+		}
+		button {
+			background-color: #f9f9f9;
+		}
 	}
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

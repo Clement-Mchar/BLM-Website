@@ -51,8 +51,10 @@ export class AlbumService {
   async update(id: string, data: UpdateAlbumData) {
     const { artistIds, ...albumData } = data
     const album = await Album.findOrFail(id)
-    
-    await album.merge(albumData).save()
+    const cleanAlbumData = Object.fromEntries(
+      Object.entries(albumData).filter(([_, v]) => v !== undefined)
+    )
+    await album.merge(cleanAlbumData).save()
     if (artistIds && artistIds.length > 0) {
       await album.related('artists').sync(artistIds)
     }

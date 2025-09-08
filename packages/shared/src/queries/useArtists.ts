@@ -71,7 +71,7 @@ export function useArtist(id: string) {
   return useQuery({
     queryKey: computed(() => artistKeys.detail(id)),
     queryFn: async () => {
-      const artist = await blmApi.getArtistEdit(id);
+      const artist = await blmApi.getArtist(id);
       return artist;
     },
   });

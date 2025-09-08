@@ -8,6 +8,7 @@ import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import { compose } from '@adonisjs/core/helpers'
 import { WithUuid } from '../mixins/with_uuid.js'
 import Post from './post.js'
+import Video from './video.js'
 export default class Artist extends compose(BaseModel, Attachmentable, WithTime, WithUuid) {
   @manyToMany(() => Event, {
     pivotTable: 'artists_events',
@@ -24,6 +25,11 @@ export default class Artist extends compose(BaseModel, Attachmentable, WithTime,
   })
   declare albums: ManyToMany<typeof Album>
 
+  @manyToMany(() => Video, {
+    pivotTable: 'artists_videos',
+  })
+  declare videos: ManyToMany<typeof Video>
+  
   @column()
   declare name: string
 

@@ -30,7 +30,7 @@ const header = z
   .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), "File type not supported")
   .optional();
 
-const title = z.string().min(1, { message: "Must be 3 or more characters long" }).max(20);
+const title = z.string().min(1, { message: "Must be 3 or more characters long" }).max(200);
 const body = z
   .string()
   .max(10000)
@@ -161,8 +161,8 @@ const handleSave = (fieldName: string, value: string) => {
   const schemaMap = {
     title: title,
     category: category,
-    header: header,
     body: body,
+    header: header
   };
 
   const schema = schemaMap[key];
@@ -199,7 +199,7 @@ const handleSave = (fieldName: string, value: string) => {
     },
     {
       onSuccess: () => {
-        router.push("/back-office/posts");
+        toast({ title: "Field updated!" });
       },
       onError: (error) => {
         console.error("Update failed", error);
@@ -247,9 +247,9 @@ const handleChange = async (e: Event) => {
 
 <template>
   <div v-if="isLoading">Loading...</div>
-  <div v-else-if="post" class="mt-4">
+  <div v-else-if="post" class="mt-4 w-full flex justify-center flex-col items-center">
     <EditableField fieldName="Title" :schema="title" :default-value="post!.title" :entity-id="post!.id" @save="handleSave" />
-    <EditableTipTap fieldName="Body" :schema="body" :default-value="post!.body" :entity-id="post!.id" @save="handleSave" />
+    <EditableTipTap fieldName="Body" :schema="body" :default-value="post!.body" :entity-id="post!.id" @save="handleSave" class="w-[200em]" />
     <div class="mt-1 mb-1 place-self-center">Category</div>
     <Select
       v-model="selectedCategory"

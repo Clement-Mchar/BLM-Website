@@ -7,6 +7,37 @@ const router = createRouter({
 			name: "home",
 			component: () => import("../views/Home.vue"),
 		},
+		{
+			path: "/events",
+			name: "events",
+			component: () => import("../views/Events.vue"),
+		},
+
+		{
+			path: "/releases",
+			name: "releases",
+			component: () => import("../views/Albums.vue"),
+			props: true,
+		},
+
+		{
+			path: "/videos",
+			name: "videos",
+			component: () => import("../views/Videos.vue"),
+			props: true,
+		},
+		{
+			path: "/artists",
+			name: "artists",
+			component: () => import("../views/Artists.vue"),
+			props: true,
+		},
+		{
+			path: "/artists/:id",
+			name: "artist",
+			component: () => import("../views/ArtistDetails.vue"),
+			props: true,
+		},
 	],
 });
 

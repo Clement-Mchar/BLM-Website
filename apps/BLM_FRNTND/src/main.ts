@@ -1,4 +1,6 @@
 import { createApp } from "vue";
+import "./style.css";
+import ui from "@nuxt/ui/vue-plugin";
 import {
 	VueQueryPlugin,
 	type VueQueryPluginOptions,
@@ -14,5 +16,6 @@ const vueQueryPluginOptions: VueQueryPluginOptions = {
 };
 createApp(App)
 	.use(router)
+	.use(ui)
 	.use(VueQueryPlugin, vueQueryPluginOptions)
 	.mount("#app");

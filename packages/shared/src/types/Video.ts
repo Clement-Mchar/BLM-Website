@@ -6,6 +6,8 @@ export interface Video {
   url: string
   category: string
   artistIds: string[]
+  createdAt: string
+  thumbnailUrl?: string
 }
 
 export interface CreateVideo {

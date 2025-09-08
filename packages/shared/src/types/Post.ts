@@ -10,6 +10,7 @@ export interface Post {
   category: string
   artistIds?: string[]
   albumIds?: string[]
+  createdAt: string
 }
 
 export interface CreatePost {

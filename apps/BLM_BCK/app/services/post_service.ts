@@ -21,8 +21,7 @@ export class PostService {
       await post.related('albums').attach(albumIds)
       await post.load('albums')
     }
-    
-    
+
     return post
   }
 
@@ -61,8 +60,10 @@ export class PostService {
   async update(id: string, data: UpdatePostData) {
     const { artistIds, albumIds, ...postData } = data
     const post = await Post.findOrFail(id)
-
-    await post.merge(postData).save()
+    const cleanPostData = Object.fromEntries(
+      Object.entries(postData).filter(([_, v]) => v !== undefined)
+    )
+    await post.merge(cleanPostData).save()
     if (artistIds && artistIds.length > 0) {
       await post.related('artists').sync(artistIds)
     }

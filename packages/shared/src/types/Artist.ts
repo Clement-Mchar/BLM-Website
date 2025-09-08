@@ -1,4 +1,6 @@
+import type { Album } from "./Album"
 import type { UploadedFile } from "./UploadedFile"
+import type { Video } from "./Video"
 
 export interface Artist  {
     id: string
@@ -10,6 +12,9 @@ export interface Artist  {
     avatar?: UploadedFile
     insta?: string
     role?: string
+    albums?: Album[]
+    videos?: Video[]
+    createdAt: string
 }
 
 export interface CreateArtist {

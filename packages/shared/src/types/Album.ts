@@ -7,6 +7,7 @@ export interface Album {
   cover?: UploadedFile;
   link?: string;
   artistIds?: string[];
+  createdAt: string;
 }
 
 export interface CreateAlbum {
@@ -15,4 +16,5 @@ export interface CreateAlbum {
   cover?: File;
   link?: string;
   artistIds: string[];
+  createdAt: string;
 }

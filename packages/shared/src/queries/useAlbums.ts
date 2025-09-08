@@ -74,7 +74,7 @@ export function useAlbum(id: string) {
   return useQuery({
     queryKey: computed(() => albumKeys.detail(id)),
     queryFn: async () => {
-      const album = await blmApi.getAlbumEdit(id);
+      const album = await blmApi.getAlbum(id);
       return album;
     },
   });

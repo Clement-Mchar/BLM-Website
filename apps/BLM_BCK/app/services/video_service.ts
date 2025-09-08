@@ -1,11 +1,24 @@
 import Video from '#models/video'
 import { inject } from '@adonisjs/core'
 import { CreateVideoData, UpdateVideoData } from '../interfaces/video_interface.js'
+
+function extractYouTubeId(url: string): string | null {
+  const regExp =
+    /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  const match = url.match(regExp)
+  return match ? match[1] : null
+}
 @inject()
 export class VideoService {
   async all() {
     const videos = await Video.query().preload('artists')
-    return videos
+    return videos.map((video) => {
+      const id = extractYouTubeId(video.url)
+      return {
+        ...video.serialize(),
+        thumbnailUrl: id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null,
+      }
+    })
   }
 
   async store(data: CreateVideoData) {

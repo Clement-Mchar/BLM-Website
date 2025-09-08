@@ -21,7 +21,7 @@ const { data: albums } = useAlbums();
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z.string().min(1).max(100),
+    title: z.string().min(1).max(200),
     body: z.string().max(10000),
     header: z
       .instanceof(File)

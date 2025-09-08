@@ -14,7 +14,7 @@ import { middleware } from '#start/kernel'
 const AlbumController = () => import('#controllers/album_controller')
 const PostController = () => import('#controllers/post_controller')
 const EventController = () => import('#controllers/event_controller')
-const VideoController = () => import('#controllers/album_controller')
+const VideoController = () => import('#controllers/video_controller')
 const UserController = () => import('#controllers/user_controller')
 const ArtistController = () => import('#controllers/artist_controller')
 const AuthController = () => import('#controllers/auth_controller')

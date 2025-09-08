@@ -70,7 +70,7 @@ export function usePost(id: string) {
 	return useQuery({
 		queryKey: computed(() => postKeys.detail(id)),
 		queryFn: async () => {
-			const post = await blmApi.getPostEdit(id);
+			const post = await blmApi.getPost(id);
 			return post;
 		},
 	});

@@ -1,29 +1,47 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { usePosts } from "@blm/shared";
-
-const { data: posts, isLoading, error } = usePosts();
-
-const lastPost = computed(() => {
-	if (!posts.value || posts.value.length === 0) return null;
-	return posts.value[posts.value.length - 1];
-});
+const { data: posts, isLoading } = usePosts();
+import HeaderPicture from "./HeaderPicture.vue";
+import { computed } from "vue";
+const latestPosts = computed(() =>
+	posts?.value
+		?.slice()
+		?.sort(
+			(a, b) =>
+				new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+		)
+		?.slice(0, 3)
+);
 </script>
 <template>
-  
 	<section v-if="isLoading">Chargement du dernier post…</section>
 
-	<section
-		v-else-if="lastPost"
-		class="absolute flex flex-col justify-end top-0 z-40 bg-[#071222] w-full h-[50em] bg-no-repeat bg-contain bg-center"
-		:style="`background-image: url(${lastPost.header?.url})`"
+	<UCarousel
+		:items="latestPosts"
+		v-slot="{ item: post }"
+		class="flex flex-col justify-center"
+		fade
+		dots
+		autoplay
+		:autoplay-speed="5000"
+		:ui="{
+			dot: 'w-3 h-3 p-0',
+		}"
 	>
-		<h2 class="px-48 text-4xl text-left text-white py-12">{{ lastPost.title }}</h2>
-
-		<div
-			class="pointer-events-none absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black/80 to-transparent z-20"
-		></div>
-	</section>
-	<section v-else>Aucun post disponible.</section>
+		<ULink
+			:to="{
+				name: 'post',
+				params: { category: post.category.toLocaleLowerCase(), id: post.id },
+			}"
+		>
+			<HeaderPicture
+				v-if="post"
+				:title="post.title"
+				:picture="post.header?.url"
+				class="h-[43em]"
+			/>
+		</ULink>
+	</UCarousel>
 </template>
+
 <style scoped></style>

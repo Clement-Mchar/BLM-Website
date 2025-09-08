@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import Header from "./components/Header.vue";
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 </script>
 
 <template>
-	<div class="flex flex-col">
-		<Header />
-		<router-view />
-	</div>
+	<UApp>
+		<div class="min-h-screen flex flex-col justify-between">
+			<Navbar />
+			<router-view class="grow" />
+			<Footer class="flex-end" />
+		</div>
+	</UApp>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
