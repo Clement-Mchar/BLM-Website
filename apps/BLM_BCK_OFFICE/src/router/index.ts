@@ -13,7 +13,6 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const user = await blmApi.setCurrentUser();
 
-
   if (user && to.meta.guestOnly) return { name: "back-office" };
   if (!user && !to.meta.requiresAuth) return;
 

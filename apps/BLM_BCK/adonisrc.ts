@@ -39,7 +39,8 @@ export default defineConfig({
     () => import('@jrmc/adonis-attachment/attachment_provider'),
     () => import('@adonisjs/cors/cors_provider'),
     () => import('@adonisjs/limiter/limiter_provider'),
-    () => import('@adonisjs/drive/drive_provider')
+    () => import('@adonisjs/drive/drive_provider'),
+    () => import('@benhepburn/adonis-sentry/sentry_provider')
   ],
 
   /*

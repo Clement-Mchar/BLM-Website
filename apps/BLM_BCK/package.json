@@ -64,6 +64,7 @@
     "@adonisjs/vite": "^4.0.0",
     "@aws-sdk/client-s3": "^3.804.0",
     "@aws-sdk/s3-request-presigner": "^3.804.0",
+    "@benhepburn/adonis-sentry": "^1.0.4",
     "@jrmc/adonis-attachment": "^3.2.0",
     "@vinejs/vine": "^2.1.0",
     "edge.js": "^6.2.0",
@@ -77,6 +78,5 @@
       "./app/middleware/*.ts"
     ]
   },
-
   "prettier": "@adonisjs/prettier-config"
 }

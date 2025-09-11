@@ -1,6 +1,8 @@
 import { createApp } from "vue";
 import "./style.css";
 import ui from "@nuxt/ui/vue-plugin";
+import * as Sentry from "@sentry/vue";
+
 import {
 	VueQueryPlugin,
 	type VueQueryPluginOptions,
@@ -14,8 +16,18 @@ const vueQueryPluginOptions: VueQueryPluginOptions = {
 	},
 	enableDevtoolsV6Plugin: true,
 };
-createApp(App)
+const app = createApp(App)
 	.use(router)
 	.use(ui)
-	.use(VueQueryPlugin, vueQueryPluginOptions)
-	.mount("#app");
+	.use(VueQueryPlugin, vueQueryPluginOptions);
+
+Sentry.init({
+	app,
+	dsn: import.meta.env.VITE_SENTRY_DSN,
+	// Adds request headers and IP for users, for more info visit:
+	// https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/#sendDefaultPii
+	sendDefaultPii: true,
+	integrations: [],
+});
+
+app.mount("#app");

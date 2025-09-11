@@ -11,6 +11,7 @@
   "dependencies": {
     "@blm/shared": "workspace:*",
     "@nuxt/ui": "https://pkg.pr.new/@nuxt/ui@4229",
+    "@sentry/vue": "^10.11.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/vue-query": "^5.81.2",
     "@unhead/vue": "^2.0.11",

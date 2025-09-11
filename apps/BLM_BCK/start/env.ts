@@ -48,9 +48,17 @@ export default await Env.create(new URL('../', import.meta.url), {
   |----------------------------------------------------------
   */
   DRIVE_DISK: Env.schema.enum(['r2', 'fs'] as const),
-  
+
   R2_KEY: Env.schema.string(),
   R2_SECRET: Env.schema.string(),
   R2_BUCKET: Env.schema.string(),
-  R2_ENDPOINT: Env.schema.string()
+  R2_ENDPOINT: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Sentry environment variables
+  |----------------------------------------------------------
+  */
+  SENTRY_DSN: Env.schema.string.optional(),
+  SENTRY_TRACES_SAMPLE_RATE: Env.schema.number.optional()
 })

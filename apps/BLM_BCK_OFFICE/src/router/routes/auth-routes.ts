@@ -7,4 +7,9 @@ export default [
     component: Login,
     meta: { guestOnly: true },
   },
+  {
+    path: "/",
+    name: "root",
+    redirect: { name: "login" },
+  }
 ];
