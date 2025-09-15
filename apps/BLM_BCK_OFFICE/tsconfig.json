@@ -1,14 +1,13 @@
 {
   "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

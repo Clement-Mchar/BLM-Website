@@ -16,7 +16,6 @@ declare module 'vue' {
     ArtistsLayout: typeof import('./src/components/ArtistsLayout.vue')['default']
     Card: typeof import('./src/components/Card.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
-    Fuckedagain: typeof import('./src/components/fuckedagain.vue')['default']
     HeaderPicture: typeof import('./src/components/HeaderPicture.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IFuckedUp: typeof import('./src/components/fuckedagain.vue')['default']

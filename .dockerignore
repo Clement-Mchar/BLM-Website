@@ -1,0 +1,26 @@
+# Ignorer les dépendances locales
+node_modules
+**/node_modules
+.pnpm-store
+
+# Build local et artefacts
+dist
+tmp
+*.log
+
+# Config locales
+.env
+.env.*
+!.env.example   # tu peux garder un exemple si tu veux
+
+# Dépôts & éditeur
+.git
+.gitignore
+Dockerfile
+docker-compose*.yml
+.vscode
+.idea
+
+# Autres fichiers inutiles
+*.md
+*.lock

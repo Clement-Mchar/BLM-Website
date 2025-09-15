@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
+import Cookies from "./views/Cookies.vue";
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import Footer from "./components/Footer.vue";
 		<div class="min-h-screen flex flex-col justify-between">
 			<Navbar />
 			<router-view class="grow" />
+			<Cookies />
 			<Footer class="flex-end" />
 		</div>
 	</UApp>

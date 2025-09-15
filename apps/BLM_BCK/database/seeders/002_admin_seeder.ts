@@ -6,7 +6,7 @@ import env from '#start/env'
 export default class extends BaseSeeder {
   async run() {
     const pwd = env.get('ADMIN_PASSWORD')
-    const users = await User.createMany([
+    await User.createMany([
       {
         username : "Don",
         password : pwd as string,

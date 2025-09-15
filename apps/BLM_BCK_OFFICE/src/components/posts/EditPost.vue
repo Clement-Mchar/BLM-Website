@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import EditableField from "../ui/editable/EditableField.vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { useUpdatePost, usePost, useUpdatePostHeader, useAlbums, useArtists } from "@blm/shared";
 import { z } from "zod";
 import { useToast } from "../ui/toast";
@@ -14,7 +14,6 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import ComboBox from "../ComboBox.vue";
 
 const route = useRoute();
-const router = useRouter();
 
 const postId = String(route.params.id);
 const { data: post, isLoading } = usePost(postId);

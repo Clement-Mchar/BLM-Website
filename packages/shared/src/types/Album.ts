@@ -16,5 +16,5 @@ export interface CreateAlbum {
   cover?: File;
   link?: string;
   artistIds: string[];
-  createdAt: string;
+  createdAt?: string;
 }
