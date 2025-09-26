@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-row justify-between items-center p-w-screen border-b-white border-solid border-b-2 pb-2"
+    class="flex flex-row justify-between items-center p-w-screen border-b-2 border-solid border-b-[hsl(var(--border))] pb-2"
   >
     <h2 class="text-[26px] pl-1">User : {{ auth?.username }}</h2>
     <RouterLink

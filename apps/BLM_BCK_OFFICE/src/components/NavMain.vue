@@ -43,7 +43,7 @@ defineProps<{
           <CollapsibleTrigger as-child>
             <SidebarMenuButton
               :tooltip="item.title"
-              class="hover:bg-gray-700 text-white"
+              class="hover:bg-gray-700"
             >
               <component :is="item.icon" v-if="item.icon" class="text-white" />
               <span class="text-white">{{ item.title }}</span>

@@ -8,28 +8,20 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Albums: typeof import('./src/components/albums/Albums.vue')['default']
     AnimatedLine: typeof import('./src/components/AnimatedLine.vue')['default']
     ArtistBody: typeof import('./src/components/ArtistBody.vue')['default']
-    ArtistLayout: typeof import('./src/components/ArtistLayout.vue')['default']
     ArtistName: typeof import('./src/components/ArtistName.vue')['default']
-    ArtistsLayout: typeof import('./src/components/ArtistsLayout.vue')['default']
     Card: typeof import('./src/components/Card.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
-    HeaderPicture: typeof import('./src/components/HeaderPicture.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    IFuckedUp: typeof import('./src/components/fuckedagain.vue')['default']
-    ItemsBody: typeof import('./src/components/ItemsBody.vue')['default']
     ItemsLayout: typeof import('./src/components/ItemsLayout.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
-    Post: typeof import('./src/components/posts/Post.vue')['default']
     PostCard: typeof import('./src/components/posts/PostCard.vue')['default']
     Posts: typeof import('./src/components/posts/Posts.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TestSection: typeof import('./src/components/TestSection.vue')['default']
-    UApp: typeof import('./../../node_modules/.pnpm/@nuxt+ui@https+++pkg.pr.new_f21e52be0abbd98a67c89bdeba506052/node_modules/@nuxt/ui/dist/runtime/components/App.vue')['default']
-    UCarousel: typeof import('./../../node_modules/.pnpm/@nuxt+ui@https+++pkg.pr.new_f21e52be0abbd98a67c89bdeba506052/node_modules/@nuxt/ui/dist/runtime/components/Carousel.vue')['default']
-    ULink: typeof import('./../../node_modules/.pnpm/@nuxt+ui@https+++pkg.pr.new_f21e52be0abbd98a67c89bdeba506052/node_modules/@nuxt/ui/dist/runtime/vue/components/Link.vue')['default']
+    UApp: typeof import('./../../node_modules/.pnpm/@nuxt+ui@https+++pkg.pr.new_236e83bd1fdc08a1155825e1ed5be536/node_modules/@nuxt/ui/dist/runtime/components/App.vue')['default']
+    UCarousel: typeof import('./../../node_modules/.pnpm/@nuxt+ui@https+++pkg.pr.new_236e83bd1fdc08a1155825e1ed5be536/node_modules/@nuxt/ui/dist/runtime/components/Carousel.vue')['default']
   }
 }

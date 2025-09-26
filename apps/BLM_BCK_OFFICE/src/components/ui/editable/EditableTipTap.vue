@@ -44,7 +44,7 @@ const handleSubmit = async () => {
   >
     <div class="mt-1 mb-1 place-self-center">{{ fieldName }}</div>
 
-    <div class="flex flex-row border-gray-300 border-solid border-[1px] rounded-md w-full h-96 justify-start mb-3">
+    <div class="flex flex-row border-gray-300 border-solid border rounded-md w-full h-96 justify-start mb-3">
       <EditableArea class="min-w-full rounded-md">
         <EditablePreview v-if="!isEditing" class="bg-gray-800 pt-[6px] rounded-md pl-2 min-w-full flex flex-wrap" />
         <TipTap v-else :defaultValue="props.defaultValue" v-model="inputValue" class="['flex w-[80em] h-96', props.class]" :class="props.class" focus="none" />

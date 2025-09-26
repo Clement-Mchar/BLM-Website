@@ -3,7 +3,7 @@
     <div class="w-full"></div>
     <div v-if="item?.data?.value" class="w-96">
       <div v-for="key in keys" :key="key as string" class="items-center flex flex-col mb-4 w-96 border rounded-xl justify-between pb-4">
-        <div class="border-b-[1px] min-w-full text-center">{{ key }}</div>
+        <div class="border-b min-w-full text-center">{{ key }}</div>
 
         <div v-if="isImage(item.data.value[key])">
           <img :src="item.data.value[key].url" alt="Image" class="w-32 h-32 rounded-full object-cover" />

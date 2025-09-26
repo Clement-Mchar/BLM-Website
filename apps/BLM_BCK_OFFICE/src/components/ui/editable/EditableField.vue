@@ -46,7 +46,7 @@ const handleSubmit = async () => {
     @submit="handleSubmit">
     <div class="mt-1 mb-1 place-self-center">{{ fieldName }}</div>
 
-    <div class="flex flex-row border-gray-300 border-solid border-[1px] rounded-md w-full justify-start h-[37px] mb-3">
+    <div class="flex flex-row border-gray-300 border-solid border rounded-md w-full justify-start h-[37px] mb-3">
       <EditableArea class="min-w-full min-h-full rounded-md focus-within:bg-gray-600 focus-within:pl-2">
         <EditablePreview class="bg-gray-800 pt-[6px] rounded-md pl-2 min-w-full min-h-full" />
         <EditableInput />

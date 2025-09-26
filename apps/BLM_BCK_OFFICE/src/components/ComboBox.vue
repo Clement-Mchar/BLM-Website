@@ -77,7 +77,7 @@ function removeItem(id: string) {
         </div>
       </TagsInput>
 
-      <ComboboxList class="w-[--reka-popper-anchor-width]">
+      <ComboboxList class="w-(--reka-popper-anchor-width)">
         <ComboboxEmpty />
         <ComboboxGroup>
           <ComboboxItem
