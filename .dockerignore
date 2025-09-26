@@ -18,6 +18,7 @@ tmp
 .gitignore
 Dockerfile
 docker-compose*.yml
+compose.yaml
 .vscode
 .idea
 

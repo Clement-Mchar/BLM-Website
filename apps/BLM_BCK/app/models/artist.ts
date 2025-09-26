@@ -3,13 +3,13 @@ import Event from '#models/event'
 import Album from '#models/album'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
-import { attachment, Attachmentable } from '@jrmc/adonis-attachment'
+import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import { compose } from '@adonisjs/core/helpers'
 import { WithUuid } from '../mixins/with_uuid.js'
 import Post from './post.js'
 import Video from './video.js'
-export default class Artist extends compose(BaseModel, Attachmentable, WithTime, WithUuid) {
+export default class Artist extends compose(BaseModel, WithTime, WithUuid) {
   @manyToMany(() => Event, {
     pivotTable: 'artists_events',
   })

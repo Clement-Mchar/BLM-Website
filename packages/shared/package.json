@@ -17,13 +17,13 @@
   "license": "ISC",
   "packageManager": "pnpm@10.12.1",
   "devDependencies": {
-    "@vue/tsconfig": "^0.7.0"
+    "@vue/tsconfig": "^0.8.1"
   },
   "dependencies": {
-    "@tanstack/vue-query": "^5.80.7",
-    "@types/luxon": "^3.6.2",
-    "ky": "^1.8.1",
-    "luxon": "^3.6.1",
-    "vue": "^3.5.16"
+    "@tanstack/vue-query": "^5.90.1",
+    "@types/luxon": "^3.7.1",
+    "ky": "^1.10.0",
+    "luxon": "^3.7.2",
+    "vue": "^3.5.21"
   }
 }

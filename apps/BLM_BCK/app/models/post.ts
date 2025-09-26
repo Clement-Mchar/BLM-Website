@@ -1,6 +1,6 @@
 import { WithTime } from '../mixins/with_time.js'
 import { BaseModel, column, belongsTo, manyToMany } from '@adonisjs/lucid/orm'
-import { attachment, Attachmentable } from '@jrmc/adonis-attachment'
+import { attachment } from '@jrmc/adonis-attachment'
 import type { Attachment } from '@jrmc/adonis-attachment/types/attachment'
 import User from './user.js'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
@@ -10,7 +10,7 @@ import Album from './album.js'
 import Artist from './artist.js'
 import { PostCategory } from '../enums.js'
 
-export default class Post extends compose(BaseModel, Attachmentable, WithTime, WithUuid) {
+export default class Post extends compose(BaseModel, WithTime, WithUuid) {
   static selfAssignPrimaryKey = true
   @manyToMany(() => Album, {
     pivotTable: 'albums_posts',
