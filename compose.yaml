@@ -18,9 +18,6 @@ services:
       - ".env.docker"
     ports:
       - "3333:3333"
-      - "5173:5173"
-      - "5174:5174"
-    restart: unless-stopped
     
 volumes:
     blm-data:

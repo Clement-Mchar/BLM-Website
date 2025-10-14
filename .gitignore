@@ -3,3 +3,4 @@ Backup/
 NEPASOUBLIER.md
 node_modules
 **/.env
+.env.docker
